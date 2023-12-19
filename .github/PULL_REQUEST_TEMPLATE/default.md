@@ -28,11 +28,9 @@
 
 ## 🔗 이슈 링크
 
-관련 Issue가 있을 경우 작성해주세요.<br/>
-Issue와 PR이 동일한 Repository일 경우 Issue Number를, 그렇지 않을 경우 Issue URL을 적어주세요.
+관련 Issue가 있을 경우 작성해주세요.
 
-- #`issueNumber`
-- [`issueTitle`](`URL`)
+- #
 
 <br/>
 
