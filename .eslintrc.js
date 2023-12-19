@@ -24,7 +24,7 @@ module.exports = {
   rules: {
     // 일반적인 ESLint 규칙
     'no-console': 'warn',
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'error',
     'no-undef': 'error',
 
     // React 규칙
@@ -43,13 +43,17 @@ module.exports = {
     'prettier/prettier': [
       'error',
       {
-        singleQuote: true,
-        semi: true,
-        useTabs: false,
+        printWidth: 100,
         tabWidth: 2,
+        useTabs: false,
+        semi: true,
+        singleQuote: true,
+        jsxSingleQuote: false,
         trailingComma: 'all',
-        printWidth: 120,
-        arrowParens: 'always',
+        bracketSpacing: true,
+        bracketSameLine: false,
+        arrowParens: 'avoid',
+        singleAttributePerLine: true,
       },
     ],
 
