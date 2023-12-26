@@ -59,7 +59,7 @@
 | Config            | <img src="https://img.shields.io/badge/npm v9.6.7-CB3837?style=for-the-badge&logo=npm&logoColor=white">                                                                                                                                                                                                                                                   |
 | Development       | <img src="https://img.shields.io/badge/node v18.17.1-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"> <img src="https://img.shields.io/badge/CRA v5.0.1-09D3AC?style=for-the-badge&logo=createreactapp&logoColor=white"> <img src="https://img.shields.io/badge/typescript v4.9.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> |
 | CI/CD             | <img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">                                                                                                                                                                                                                                                    |
-| Communication     | <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">                                                                                                                                               |
+| Communication     | <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> <img src="https://img.shields.io/badge/discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">                                      |
 
 ### 🔗 URL
 
@@ -71,7 +71,7 @@
 - [화면 설계서](https://www.figma.com/file/8ZuwWVt4BFT8wLDC8frKWv/%EC%9C%A0%EB%8B%9B%EB%A9%94%EC%9D%B4%ED%8A%B8-team-library?type=design&node-id=0%3A1&mode=design&t=02ZbC3RoXSmRXc2e-1)
 - [디자인 시안](https://www.figma.com/file/sgFZEAcP9yEBDFYu7EzkR0/%EC%9C%A0%EB%8B%9B%EB%A9%94%EC%9D%B4%ED%8A%B8_%EB%94%94%EC%9E%90%EC%9D%B8_01?type=design&mode=design&t=ULEbwypixQt25oea-1)
 - [이슈 관리](https://github.com/ds92ko/unit-mate/issues)
-- [협업 문서](https://www.notion.so/UnitMate-CSS-0a294e7b929a4c28b44be697cb26ef37?pvs=4)
+- [협업 문서](https://dasomko.notion.site/UnitMate-CSS-ce1039c5dd464a1fa1b9a882ca04c8dd?pvs=4)
 
 ### 📅 Duration
 
