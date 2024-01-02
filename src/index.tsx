@@ -1,16 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from './layout/Layout';
+import Basic from './pages/Basic';
+import Viewport from './pages/Viewport';
+import Percent from './pages/Percent';
+import RemandEm from './pages/RemandEm';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <BrowserRouter>
+        <React.StrictMode>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Basic />} />
+                <Route path="/viewport" element={<Viewport />} />
+                <Route path="/percent" element={<Percent />} />
+                <Route path="/rem-em" element={<RemandEm />} />
+            </Route>
+          </Routes>
+        </React.StrictMode>
+    </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
