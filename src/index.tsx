@@ -14,13 +14,12 @@ const root = ReactDOM.createRoot(
 root.render(
     <BrowserRouter>
         <React.StrictMode>
+          <Layout/>
           <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Basic />} />
-                <Route path="/viewport" element={<Viewport />} />
-                <Route path="/percent" element={<Percent />} />
-                <Route path="/rem-em" element={<RemandEm />} />
-            </Route>
+            <Route path="/" element={<Basic />} />
+            <Route path="/viewport" element={<Viewport />} />
+            <Route path="/percent" element={<Percent />} />
+            <Route path="/rem-em" element={<RemandEm />} />
           </Routes>
         </React.StrictMode>
     </BrowserRouter>
