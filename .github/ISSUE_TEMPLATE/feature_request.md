@@ -2,8 +2,9 @@
 name: Feature request
 about: Suggest an idea for this project
 title: "\U0001F31F FEATURE: "
-labels: enhancement
+labels: State-진행대기, Type-New
 assignees: ''
+
 ---
 
 ## 📝 기능 설명
