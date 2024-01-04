@@ -1,10 +1,9 @@
 import React from "react";
+import MainCalculater from "../layout/MainCalculater";
 
 function Basic() {
     return (
-        <div>
-            basic
-        </div>
+        <MainCalculater/>
     );
 }
 
