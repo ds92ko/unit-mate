@@ -1,0 +1,16 @@
+.textButton {
+  min-width: 156px;
+  padding: 26px 37px;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 40px;
+  background: hsl(0, 0%, 7%);
+}
+.iconButton {
+  min-width: 156px;
+  padding: 26px 37px;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 40px;
+  background: hsl(0, 0%, 7%);
+}
