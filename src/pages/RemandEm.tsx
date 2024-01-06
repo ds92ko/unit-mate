@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-function RemandEm() {
-    return <div>Rem & Em</div>;
+function RemAndEm() {
+  return <div>Rem & Em</div>;
 }
 
-export default RemandEm;
+export default RemAndEm;

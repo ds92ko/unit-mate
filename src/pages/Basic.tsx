@@ -1,10 +1,7 @@
-import React from "react";
-import MainCalculater from "../layout/MainCalculater";
+import React from 'react';
 
 function Basic() {
-    return (
-        <MainCalculater/>
-    );
+  return <div>basic</div>;
 }
 
 export default Basic;
