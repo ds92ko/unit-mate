@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { gnb, gnbList, gnbItem } from './index.css';
 import routesData from '@/data/routes';
 
@@ -11,7 +11,7 @@ function Nav() {
             key={id}
             className={gnbItem}
           >
-            <Link to={path}>{name}</Link>
+            <NavLink to={path}>{name}</NavLink>
           </li>
         ))}
       </ul>

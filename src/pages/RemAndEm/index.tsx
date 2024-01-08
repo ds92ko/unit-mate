@@ -1,5 +1,7 @@
+import Main from '@/components/Main';
+
 function RemAndEm() {
-  return <div>RemAndEm</div>;
+  return <Main />;
 }
 
 export default RemAndEm;

@@ -1,5 +1,7 @@
+import Main from '@/components/Main';
+
 function Basic() {
-  return <div>Basic</div>;
+  return <Main />;
 }
 
 export default Basic;
