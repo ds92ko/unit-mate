@@ -1,6 +1,6 @@
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { resultcontainer } from './index.css';
-import TogglButton from '../ToggleButton';
+import TogglButton from '@/components/ToggleButton';
 
 function Result() {
   return (
@@ -18,7 +18,7 @@ function Result() {
           deleniti amet praesentium culpa necessitatibus cumque voluptatibus consequatur expedita ex
           natus quas est at officiis officia suscipit.
         </p>
-        {/* 스크롤 확인용 */}
+        {/* TODO: 스크롤 확인용으로 추가한 Lorem ipsum. 추후 삭제 예정 */}
       </div>
       <TogglButton direction="vertical" />
     </div>

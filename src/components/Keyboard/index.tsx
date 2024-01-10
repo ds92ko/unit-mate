@@ -3,7 +3,7 @@ import { keyboardContainer } from './index.css';
 
 function Keybord() {
   return (
-    <div className={[borderBox, keyboardContainer].join(' ')}>
+    <div className={`${borderBox} ${keyboardContainer}`}>
       <ul>
         <li />
       </ul>

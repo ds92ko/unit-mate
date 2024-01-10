@@ -1,14 +1,12 @@
 import { srOnly } from '@/styles/layout.css';
-import { toggleButton, toggleButtonHorizontal, toggleButtonVertical } from './index.css';
+import { toggleButton } from './index.css';
 import { ToggleType } from './type';
 
 function TogglButton({ direction }: ToggleType) {
   return (
     <button
       type="button"
-      className={`${toggleButton} ${
-        direction === 'vertical' ? toggleButtonVertical : toggleButtonHorizontal
-      }`}
+      className={`${toggleButton} ${direction}`}
     >
       <span className={srOnly}>toggle button</span>
     </button>

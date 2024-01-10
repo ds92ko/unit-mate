@@ -1,6 +1,6 @@
-import Bookmark from '../Bookmark';
-import Keybord from '../Keyboard';
-import Result from '../Result';
+import Bookmark from '@/components/Bookmark';
+import Keybord from '@/components/Keyboard';
+import Result from '@/components/Result';
 import { mainWrap, sectionWrap } from './index.css';
 
 function Main() {

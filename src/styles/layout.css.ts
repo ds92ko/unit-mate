@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import vars from './vars.css';
 
 export const container = style({
   minWidth: 1440,
@@ -25,6 +24,6 @@ export const scrollY = style({
 });
 
 export const borderBox = style({
-  border: `2px solid ${vars.color.black1}`,
+  border: `2px solid var(--theme-color)`,
   borderRadius: 12
 });

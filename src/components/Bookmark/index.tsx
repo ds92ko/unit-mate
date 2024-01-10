@@ -1,10 +1,10 @@
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { bookmark, bookmarkContainer } from './index.css';
-import TogglButton from '../ToggleButton';
+import TogglButton from '@/components/ToggleButton';
 
 function Bookmark() {
   return (
-    <aside className={[borderBox, bookmarkContainer].join(' ')}>
+    <aside className={`${borderBox} ${bookmarkContainer}`}>
       <div className={bookmark}>
         <div className={scrollY}>
           <ul>

@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import vars from '@/styles/vars.css';
 
 export const gnb = style({
   flexGrow: 1
@@ -18,10 +17,12 @@ export const gnbItem = style({
   padding: '10px 22px',
   fontSize: 32,
   fontWeight: 700,
-  color: vars.alpha.black5,
+  color: 'var(--theme-color)',
+  opacity: 0.5,
   selectors: {
     '&:has(.active)': {
-      color: vars.color.black1
+      color: 'var(--theme-color)',
+      opacity: 1
     },
     '&:has(.active)::after': {
       content: '',
@@ -32,7 +33,7 @@ export const gnbItem = style({
       display: 'inline-block',
       width: 'calc(100% - 22px)',
       height: 5,
-      backgroundColor: vars.color.black1,
+      backgroundColor: 'var(--theme-color)',
       borderRadius: 14
     }
   }
