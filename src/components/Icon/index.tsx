@@ -1,24 +1,29 @@
-// icon.tsx
-import { iconName, IconSet } from './constants';
+import { IconName, IconSet } from './constants';
 
 interface IconProps {
-  icon: iconName;
+  name: IconName;
   width: number;
   height: number;
-  // eslint-disable-next-line react/require-default-props
-  color?: string;
 }
 
-function Icon({ icon, width, height, color }: IconProps) {
+function Icon({ name, width, height }: IconProps) {
+  const { paths, viewBox } = IconSet[name];
   return (
     <svg
       width={width}
       height={height}
-      viewBox={IconSet[icon].viewBox}
-      fill={color}
+      viewBox={viewBox}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d={IconSet[icon].path} />
+      {paths.map(path => (
+        <path
+          key={path.id}
+          d={path.d}
+          fill={path.fill}
+          stroke={path.stroke}
+          strokeWidth={path.strokeWidth}
+        />
+      ))}
     </svg>
   );
 }
