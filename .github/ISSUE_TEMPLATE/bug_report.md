@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: "\U0001F41E BUG: "
 labels: State-진행대기, Type-Bug
 assignees: ''
-
 ---
 
 ## 📝 버그 설명

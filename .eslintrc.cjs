@@ -20,11 +20,11 @@ module.exports = {
   },
   plugins: ['react-refresh', 'prettier', 'import'],
   settings: {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
     },
-    "import/resolver": {
-      "typescript": {}
+    'import/resolver': {
+      typescript: {}
     }
   },
   rules: {
@@ -33,7 +33,7 @@ module.exports = {
     'no-undef': 'error',
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
     'no-trailing-spaces': 'error',
-    "no-restricted-imports": ["error", { "patterns": ["..*"] }],
+    'no-restricted-imports': ['error', { patterns: ['..*'] }],
     'eol-last': ['error', 'always'],
     'comma-dangle': ['error', 'never'],
 
@@ -50,6 +50,6 @@ module.exports = {
 
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'error'
   }
 };
