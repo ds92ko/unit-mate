@@ -12,7 +12,7 @@ function GuideInfo({
   title,
   description,
   buttonName,
-  buttonEventType,
+  navigateType,
   isMaintenance,
   icon
 }: GuideInfoType) {
@@ -34,7 +34,7 @@ function GuideInfo({
           <button
             className={guideInfoButton}
             type="button"
-            onClick={() => buttonEventType && onChangeNavigate(buttonEventType)}
+            onClick={() => navigateType && onChangeNavigate(navigateType)}
           >
             {buttonName}
           </button>

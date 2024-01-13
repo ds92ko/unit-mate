@@ -23,10 +23,6 @@ function Router() {
       </Route>
       {/* S: 에러 페이지 확인을 위한 임시 라우터 설정 */}
       <Route
-        path="/*"
-        element={<NotFound />}
-      />
-      <Route
         path="/forbidden"
         element={<Forbidden />}
       />
@@ -40,6 +36,10 @@ function Router() {
           element={<Maintenance />}
         />
       )}
+      <Route
+        path="/*"
+        element={<NotFound />}
+      />
       {/* E: 에러 페이지 확인을 위한 임시 라우터 설정 */}
     </Routes>
   );
