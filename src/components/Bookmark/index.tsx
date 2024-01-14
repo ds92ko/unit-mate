@@ -18,7 +18,7 @@ function Bookmark() {
     <aside className={`${borderBox} ${bookmarkContainer}`}>
       <div className={`${bookmark} ${scrollY}`}>
         <div>
-          {bookmarkedData ? (
+          {bookmarkedData.length > 0 ? (
             <ul>
               {bookmarkedData.map(({ id, input, result, isBookmark }) => (
                 <li
