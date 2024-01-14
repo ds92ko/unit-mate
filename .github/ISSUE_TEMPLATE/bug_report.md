@@ -34,7 +34,9 @@ assignees: ''
 
 > 이 버그가 발생한 환경 또는 조건
 
--
+- URL:
+- OS:
+- Browser:
 
 <br/>
 
