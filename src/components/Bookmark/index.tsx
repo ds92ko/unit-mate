@@ -1,18 +1,26 @@
+import { useEffect } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { bookmark, bookmarkContainer, bookmarkGuide, bookmarkList } from './index.css';
 import History from '@/components/History';
 import TogglButton from '@/components/ToggleButton';
-import { DataType } from '@/components/Main/type';
+import { useHistoryStore } from '@/stores/historyStore';
 
-function Bookmark({ data }: DataType) {
-  const bookmarkData = data && data.filter(dataList => dataList.isBookmark);
+function Bookmark() {
+  const { bookmarkedData } = useHistoryStore();
+
+  useEffect(() => {
+    const savedBookmarkedData = localStorage.getItem('bookmarkedData');
+    if (savedBookmarkedData) {
+      useHistoryStore.setState({ bookmarkedData: JSON.parse(savedBookmarkedData) });
+    }
+  }, []);
   return (
     <aside className={`${borderBox} ${bookmarkContainer}`}>
       <div className={`${bookmark} ${scrollY}`}>
         <div>
-          {bookmarkData ? (
+          {bookmarkedData ? (
             <ul>
-              {bookmarkData.map(({ id, input, result, isBookmark }) => (
+              {bookmarkedData.map(({ id, input, result, isBookmark }) => (
                 <li
                   className={bookmarkList}
                   key={`${id}_bookmark`}

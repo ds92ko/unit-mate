@@ -8,13 +8,13 @@ type HistoryDataType = {
 
 export interface HistoryStoreType {
   historyData: HistoryDataType[];
+  bookmarkedData: HistoryType[];
   activeTab: string;
   setActiveTab: (tab: string) => void;
   toggleBookmark: (itemId: number) => void;
 }
 
 export const useHistoryStore = create<HistoryStoreType>(set => ({
-  activeTab: 'Basic',
   historyData: [
     {
       type: 'Basic',
@@ -64,6 +64,8 @@ export const useHistoryStore = create<HistoryStoreType>(set => ({
       data: []
     }
   ],
+  bookmarkedData: [],
+  activeTab: 'Basic',
   setActiveTab: tab => {
     set(() => ({
       activeTab: tab
@@ -81,7 +83,18 @@ export const useHistoryStore = create<HistoryStoreType>(set => ({
         return historyItem;
       });
 
-      return { historyData: updatedHistoryData };
+      const bookmarkedData = updatedHistoryData
+        .flatMap(historyItem => historyItem.data.filter(item => item.isBookmark))
+        .map(item => ({
+          id: item.id,
+          input: item.input,
+          result: item.result,
+          isBookmark: item.isBookmark
+        }));
+
+      localStorage.setItem('bookmarkedData', JSON.stringify(bookmarkedData));
+
+      return { historyData: updatedHistoryData, bookmarkedData };
     });
   }
 }));
