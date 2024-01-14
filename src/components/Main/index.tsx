@@ -5,13 +5,13 @@ import { mainWrap, sectionWrap } from './index.css';
 
 function Main() {
   return (
-    <main className={mainWrap}>
+    <div className={mainWrap}>
       <Bookmark />
       <section className={sectionWrap}>
         <Result />
         <Keybord />
       </section>
-    </main>
+    </div>
   );
 }
 
