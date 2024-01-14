@@ -9,7 +9,7 @@ import { DataType } from '@/components/Main/type';
 function Result({ data }: DataType) {
   const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
   return (
-    <div className=`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
+    <div className={`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
       <div className={scrollY}>
         <ul>
           {data &&

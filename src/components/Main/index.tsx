@@ -6,8 +6,8 @@ import { DataType } from './type';
 
 function Main({ data }: DataType) {
   return (
-    <main className={mainWrap}>
-      <Bookmark data={data} />
+    <div className={mainWrap}>
+      <Bookmark />
       <section className={sectionWrap}>
         <Result data={data} />
         <Keybord />
