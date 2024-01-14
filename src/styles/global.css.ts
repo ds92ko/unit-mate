@@ -6,6 +6,11 @@ globalStyle('html, body', {
   color: 'var(--theme-color)'
 });
 
+globalStyle('button', {
+  background: 'transparent',
+  cursor: 'pointer'
+});
+
 export const pretendard = fontFace({
   src: 'local("Pretendard-SemiBold")'
 });
