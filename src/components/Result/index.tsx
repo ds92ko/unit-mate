@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { resultcontainer } from './index.css';
 import TogglButton from '@/components/ToggleButton';
 
 function Result() {
+  const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
   return (
-    <div className={[borderBox, resultcontainer].join(' ')}>
+    <div className={`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
       <div className={scrollY}>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque quis exercitationem
@@ -20,7 +22,11 @@ function Result() {
         </p>
         {/* TODO: 스크롤 확인용으로 추가한 Lorem ipsum. 추후 삭제 예정 */}
       </div>
-      <TogglButton direction="vertical" />
+      <TogglButton
+        direction="vertical"
+        isResultOpen={isResultOpen}
+        setiIsResultOpen={setiIsResultOpen}
+      />
     </div>
   );
 }
