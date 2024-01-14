@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { bookmark } from '@/components/Bookmark/index.css';
 
 export const container = style({
   minWidth: 1440,
@@ -20,7 +21,22 @@ export const srOnly = style({
 
 export const scrollY = style({
   overflowY: 'auto',
-  maxHeight: 'calc(100% - 32px)'
+  maxHeight: 'calc(100% - 32px)',
+  '::-webkit-scrollbar': {
+    width: 12,
+    height: 12,
+    backgroundColor: 'transparent'
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: 'var(--theme-color)',
+    border: '4px solid var(--theme-background)',
+    borderRadius: 14
+  },
+  selectors: {
+    [`${bookmark} &`]: {
+      maxHeight: 779
+    }
+  }
 });
 
 export const borderBox = style({
