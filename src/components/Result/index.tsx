@@ -17,6 +17,7 @@ function Result({ data }: DataType) {
                 key={`${id}_result`}
               >
                 <History
+                  id={id}
                   input={input}
                   result={result}
                   isBookmark={isBookmark}

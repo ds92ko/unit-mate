@@ -18,6 +18,7 @@ function Bookmark({ data }: DataType) {
                   key={`${id}_bookmark`}
                 >
                   <History
+                    id={id}
                     input={input}
                     result={result}
                     isBookmark={isBookmark}

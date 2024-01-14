@@ -7,14 +7,18 @@ import {
   historyWrap
 } from './index.css';
 import { srOnly } from '@/styles/layout.css';
+import { useHistoryStore } from '@/stores/historyStore';
 
-function History({ input, result, isBookmark }: HistoryType) {
+function History({ id, input, result, isBookmark }: HistoryType) {
+  const { toggleBookmark } = useHistoryStore();
+
   return (
     <article className={historyWrap}>
       <div className={historyHeader}>
         <span className={historyInput}>{input}</span>
         <button
           type="button"
+          onClick={() => toggleBookmark(id)}
           className={`${historyBookmark} ${isBookmark && 'isActive'}`}
         >
           <span className={srOnly}>bookmark</span>

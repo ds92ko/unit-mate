@@ -1,5 +1,5 @@
 export interface HistoryType {
-  id?: number;
+  id: number;
   input: string;
   result: string;
   isBookmark: boolean;
