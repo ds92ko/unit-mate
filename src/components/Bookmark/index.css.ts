@@ -1,12 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { resultcontainer } from '@/components/Result/index.css';
 
-export const bookmark = style({
-  padding: '0 28px',
-  minWidth: 338,
-  minHeight: 779
-});
-
 export const bookmarkContainer = style({
   padding: '29px 0',
   position: 'relative'
@@ -30,4 +24,18 @@ export const bookmarkGuide = style({
   transform: 'translate(-50%, -50%)',
   fontSize: 18,
   fontWeight: 'bold'
+});
+
+export const bookmark = style({
+  minWidth: 0,
+  maxWidth: 0,
+  minHeight: '100vh',
+  overflow: 'hidden',
+  transition: 'all ease-in-out 0.3s',
+  selectors: {
+    [`${bookmarkContainer}.isOpen &`]: {
+      padding: '0 28px',
+      minWidth: 338
+    }
+  }
 });

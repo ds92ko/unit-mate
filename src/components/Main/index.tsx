@@ -12,7 +12,7 @@ function Main({ data }: DataType) {
         <Result data={data} />
         <Keybord />
       </section>
-    </main>
+    </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { bookmark, bookmarkContainer, bookmarkGuide, bookmarkList } from './index.css';
 import History from '@/components/History';
@@ -6,6 +6,7 @@ import TogglButton from '@/components/ToggleButton';
 import { useHistoryStore } from '@/stores/historyStore';
 
 function Bookmark() {
+  const [isBookmarkOpen, setiIsBookmarkOpen] = useState<boolean>(true);
   const { bookmarkedData } = useHistoryStore();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ function Bookmark() {
     }
   }, []);
   return (
-    <aside className={`${borderBox} ${bookmarkContainer}`}>
+    <aside className={`${borderBox} ${bookmarkContainer} ${isBookmarkOpen ? 'isOpen' : ''}`}>
       <div className={`${bookmark} ${scrollY}`}>
         <div>
           {bookmarkedData.length > 0 ? (
@@ -39,7 +40,11 @@ function Bookmark() {
           )}
         </div>
       </div>
-      <TogglButton direction="horizontal" />
+      <TogglButton
+        direction="horizontal"
+        isBookmarkOpen={isBookmarkOpen}
+        setiIsBookmarkOpen={setiIsBookmarkOpen}
+      />
     </aside>
   );
 }

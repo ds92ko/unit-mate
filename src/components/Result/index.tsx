@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { resultcontainer } from './index.css';
 import TogglButton from '@/components/ToggleButton';
@@ -6,8 +7,9 @@ import History from '@/components/History';
 import { DataType } from '@/components/Main/type';
 
 function Result({ data }: DataType) {
+  const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
   return (
-    <div className={`${borderBox} ${resultcontainer}`}>
+    <div className=`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
       <div className={scrollY}>
         <ul>
           {data &&
@@ -26,7 +28,11 @@ function Result({ data }: DataType) {
             ))}
         </ul>
       </div>
-      <TogglButton direction="vertical" />
+      <TogglButton
+        direction="vertical"
+        isResultOpen={isResultOpen}
+        setiIsResultOpen={setiIsResultOpen}
+      />
     </div>
   );
 }
