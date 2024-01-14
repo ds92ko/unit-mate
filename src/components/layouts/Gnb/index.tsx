@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { gnb, gnbList, gnbItem } from './index.css';
 import routesData from '@/data/routes';
+import { useHistoryStore } from '@/stores/historyStore';
 
 function Nav() {
+  const { setActiveTab } = useHistoryStore();
+
   return (
     <nav className={gnb}>
       <ul className={gnbList}>
@@ -11,7 +14,12 @@ function Nav() {
             key={id}
             className={gnbItem}
           >
-            <Link to={path}>{name}</Link>
+            <NavLink
+              to={path}
+              onClick={() => setActiveTab(name)}
+            >
+              {name}
+            </NavLink>
           </li>
         ))}
       </ul>

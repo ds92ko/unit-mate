@@ -1,5 +1,7 @@
+import Main from '@/components/Main';
+
 function Viewport() {
-  return <div>Viewport</div>;
+  return <Main />;
 }
 
 export default Viewport;

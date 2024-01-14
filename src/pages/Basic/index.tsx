@@ -1,28 +1,9 @@
-import { Bookmark, ColorPicker, ColorMode } from '@/components/Icon/index';
+import Main from '@/components/Main';
+import { useHistoryStore } from '@/stores/historyStore';
 
 function Basic() {
-  return (
-    <div>
-      Basic
-      <Bookmark
-        width={14}
-        height={20}
-        fillColor="#fff"
-        strokeColor="#121212"
-      />
-      <ColorPicker
-        width={48}
-        height={46}
-        fillColor="#fff"
-        strokeColor="#121212"
-      />
-      <ColorMode
-        width={36}
-        height={36}
-        fillColor="#121212"
-      />
-    </div>
-  );
+  const { historyData } = useHistoryStore();
+  return <Main data={historyData[0].data} />;
 }
 
 export default Basic;

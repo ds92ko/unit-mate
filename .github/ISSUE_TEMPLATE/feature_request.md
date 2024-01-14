@@ -4,20 +4,11 @@ about: Suggest an idea for this project
 title: "\U0001F31F FEATURE: "
 labels: State-진행대기, Type-New
 assignees: ''
-
 ---
 
 ## 📝 기능 설명
 
 > 새로운 기능에 대한 간략한 설명
-
--
-
-<br/>
-
-## 💡 동기
-
-> 이 기능이 필요하거나 유익한 이유 설명
 
 -
 
