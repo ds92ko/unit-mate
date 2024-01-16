@@ -9,7 +9,7 @@ function Nav() {
   return (
     <nav className={gnb}>
       <ul className={gnbList}>
-        {routesData.map(({ id, name, path }) => (
+        {routesData.gnb.map(({ id, name, path }) => (
           <li
             key={id}
             className={gnbItem}
