@@ -35,18 +35,6 @@ export const historyInput = style({
   }
 });
 
-export const historyBookmark = style({
-  width: 18,
-  height: 26,
-  border: '2px solid var(--theme-color)',
-  backgroundColor: 'var(--theme-background)',
-  selectors: {
-    '&.isActive': {
-      backgroundColor: 'var(--theme-color)'
-    }
-  }
-});
-
 export const historyResult = style({
   fontSize: 26,
   lineHeight: '30px',
