@@ -1,49 +1,28 @@
-import React from 'react';
 import { IconName, IconSet } from './constants';
 
 interface IconProps {
   name: IconName;
-  width: number;
-  height: number;
+  size: number;
+  color: string;
 }
 
-function Icon({ name, width, height }: IconProps) {
-  const { paths, viewBox } = IconSet[name];
+function Icon({ name, size, color }: IconProps) {
+  const { d, fillRule, clipRule } = IconSet[name];
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
-      viewBox={viewBox}
+      width={size}
+      height={size}
+      viewBox="0 0 36 36"
       fill="none"
     >
-      {paths.map(path => (
-        <React.Fragment key={path.id}>
-          {path.maskWrap && (
-            <mask
-              id={path.maskWrap.id}
-              fill={path.maskWrap.fill}
-            >
-              <path
-                d={path.maskWrap.d}
-                fillRule="evenodd"
-                clipRule="evenodd"
-              />
-            </mask>
-          )}
-
-          <path
-            d={path.d}
-            fill={path.fill}
-            stroke={path.stroke}
-            strokeWidth={path.strokeWidth}
-            fillRule={path.fillRule}
-            clipRule={path.clipRule}
-            mask={path.mask}
-          />
-        </React.Fragment>
-      ))}
+      <path
+        fillRule={fillRule}
+        clipRule={clipRule}
+        d={d}
+        fill={color}
+      />
     </svg>
   );
 }

@@ -1,5 +1,5 @@
 import { useThemeStore } from '@/stores/themeStore';
-import { themeMenu, themeList } from './index.css';
+import { themeMenu, themeList, themeItem, colorInput, colorLabel } from './index.css';
 import { useTheme } from '@/hooks/useTheme';
 import Icon from '@/components/Icon';
 
@@ -9,29 +9,35 @@ function Theme() {
 
   return (
     <nav className={themeMenu}>
-      {darkMode}
       <ul className={themeList}>
-        <li>
-          <input
-            type="color"
-            value={themeColor}
-            onChange={handleChangeColor}
-          />
-          <Icon
-            width={49}
-            height={46}
-            name="color"
-          />
+        <li className={themeItem}>
+          <label
+            htmlFor="colorPicker"
+            className={colorLabel}
+          >
+            <input
+              id="colorPicker"
+              type="color"
+              value={themeColor}
+              onChange={handleChangeColor}
+              className={colorInput}
+            />
+            <Icon
+              size={40}
+              name="colorPicker"
+              color="var(--theme-color)"
+            />
+          </label>
         </li>
-        <li>
+        <li className={themeItem}>
           <button
             type="button"
             onClick={toggleDarkMode}
           >
             <Icon
-              width={36}
-              height={36}
-              name="mode"
+              size={36}
+              name={darkMode ? 'lightMode' : 'darkMode'}
+              color="var(--theme-color)"
             />
           </button>
         </li>
