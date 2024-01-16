@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: "\U0001F41E BUG: "
 labels: State-진행대기, Type-Bug
 assignees: ''
-
 ---
 
 ## 📝 버그 설명
@@ -35,7 +34,9 @@ assignees: ''
 
 > 이 버그가 발생한 환경 또는 조건
 
--
+- URL:
+- OS:
+- Browser:
 
 <br/>
 

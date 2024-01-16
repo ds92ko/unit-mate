@@ -2,16 +2,17 @@ import Bookmark from '@/components/Bookmark';
 import Keybord from '@/components/Keyboard';
 import Result from '@/components/Result';
 import { mainWrap, sectionWrap } from './index.css';
+import { DataType } from './type';
 
-function Main() {
+function Main({ data }: DataType) {
   return (
-    <main className={mainWrap}>
+    <div className={mainWrap}>
       <Bookmark />
       <section className={sectionWrap}>
-        <Result />
+        <Result data={data} />
         <Keybord />
       </section>
-    </main>
+    </div>
   );
 }
 

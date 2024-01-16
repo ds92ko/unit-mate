@@ -4,10 +4,12 @@ import Layout from '@/components/Layout';
 import routesData from '@/data/routes';
 
 function Router() {
+  const { gnb, etc } = routesData;
+
   return (
     <Routes>
       <Route element={<Layout />}>
-        {routesData.map(({ path, element: Component, index }) => (
+        {gnb.map(({ path, element: Component, index }) => (
           <Route
             key={path}
             path={path}
@@ -16,6 +18,13 @@ function Router() {
           />
         ))}
       </Route>
+      {etc.map(({ path, element: Component }) => (
+        <Route
+          key={path}
+          path={path}
+          element={<Component />}
+        />
+      ))}
     </Routes>
   );
 }

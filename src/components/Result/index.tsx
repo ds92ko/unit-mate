@@ -1,26 +1,38 @@
+import { useState } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { resultcontainer } from './index.css';
 import TogglButton from '@/components/ToggleButton';
+import { bookmarkList } from '@/components/Bookmark/index.css';
+import History from '@/components/History';
+import { DataType } from '@/components/Main/type';
 
-function Result() {
+function Result({ data }: DataType) {
+  const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
   return (
-    <div className={[borderBox, resultcontainer].join(' ')}>
+    <div className={`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
       <div className={scrollY}>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque quis exercitationem
-          laudantium magnam autem, cupiditate voluptates sequi perferendis, praesentium facilis
-          facilis aliquid. Pariatur ipsum iusto at consequatur inventore! Lorem ipsum dolor
-          consectetur adipisicing elit. Repellat earum deleniti amet praesentium culpa
-          necessitatibus cumque voluptatibus consequatur expedita ex natus quas est at Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. earum deleniti amet amet praesentium culpa
-          obcaecati necessitatibus cumque voluptatibus expedita ex natus quas est est at placeat, in
-          officiis officia suscipit. Lorem ipsum amet consectetur adipisicing elit. Repellat earum
-          deleniti amet praesentium culpa necessitatibus cumque voluptatibus consequatur expedita ex
-          natus quas est at officiis officia suscipit.
-        </p>
-        {/* TODO: 스크롤 확인용으로 추가한 Lorem ipsum. 추후 삭제 예정 */}
+        <ul>
+          {data &&
+            data.map(({ id, input, result, isBookmark }) => (
+              <li
+                className={`${bookmarkList} ${id && id + 1 === data.length ? 'recentHistory' : ''}`}
+                key={`${id}_result`}
+              >
+                <History
+                  id={id}
+                  input={input}
+                  result={result}
+                  isBookmark={isBookmark}
+                />
+              </li>
+            ))}
+        </ul>
       </div>
-      <TogglButton direction="vertical" />
+      <TogglButton
+        direction="vertical"
+        isResultOpen={isResultOpen}
+        setiIsResultOpen={setiIsResultOpen}
+      />
     </div>
   );
 }
