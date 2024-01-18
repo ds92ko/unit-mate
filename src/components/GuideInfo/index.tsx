@@ -4,11 +4,12 @@ import {
   guideInfoButton,
   guideInfoContainer,
   guideInfoDescription,
-  guideInfoIcon,
   guideInfoTitle
 } from './index.css';
 import { GuideInfoType } from './type';
 import { useThemeStore } from '@/stores/themeStore';
+import Icon from '@/components//Icon';
+import vars from '@/styles/vars.css';
 
 function GuideInfo({
   title,
@@ -44,7 +45,11 @@ function GuideInfo({
             </button>
           )}
         </div>
-        <div className={guideInfoIcon}>{icon}</div>
+        <Icon
+          size={340}
+          name={icon}
+          color={darkMode ? vars.color.white : vars.color.black1}
+        />
       </div>
     </div>
   );

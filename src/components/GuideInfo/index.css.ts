@@ -89,9 +89,3 @@ export const guideInfoButton = style({
     }
   }
 });
-
-export const guideInfoIcon = style({
-  width: 342,
-  height: 303,
-  border: `1px solid ${vars.color.black}`
-});

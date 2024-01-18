@@ -4,5 +4,5 @@ export interface GuideInfoType {
   buttonName?: string;
   navigateType?: 'main' | 'prev';
   isMaintenance: boolean;
-  icon: string; // 임시 type값
+  icon: string;
 }
