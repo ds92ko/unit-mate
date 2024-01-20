@@ -2,11 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   guideInfo,
   guideInfoButton,
+  guideInfoContainer,
   guideInfoDescription,
-  guideInfoIcon,
   guideInfoTitle
 } from './index.css';
 import { GuideInfoType } from './type';
+import { useThemeStore } from '@/stores/themeStore';
+import Icon from '@/components//Icon';
+import vars from '@/styles/vars.css';
 
 function GuideInfo({
   title,
@@ -17,30 +20,32 @@ function GuideInfo({
   icon
 }: GuideInfoType) {
   const navigate = useNavigate();
+  const { darkMode } = useThemeStore();
 
-  const onChangeNavigate = (eventType: string) => {
-    if (eventType === 'main') {
-      navigate('/');
-    } else {
-      navigate(-1);
-    }
-  };
+  const routePath = navigateType === 'main' ? '/' : '-1';
+
   return (
-    <div className={`${guideInfo} ${isMaintenance && 'isMaintenance'}`}>
-      <div>
-        <h1 className={guideInfoTitle}>{title}</h1>
-        {description && <p className={guideInfoDescription}>{description}</p>}
-        {buttonName && (
-          <button
-            className={guideInfoButton}
-            type="button"
-            onClick={() => navigateType && onChangeNavigate(navigateType)}
-          >
-            {buttonName}
-          </button>
-        )}
+    <div className={`${guideInfoContainer} ${darkMode && 'themeDark'}`}>
+      <div className={`${guideInfo} ${isMaintenance && 'isMaintenance'}`}>
+        <div>
+          <h1 className={guideInfoTitle}>{title}</h1>
+          {description && <p className={guideInfoDescription}>{description}</p>}
+          {buttonName && (
+            <button
+              className={guideInfoButton}
+              type="button"
+              onClick={() => navigate(routePath)}
+            >
+              {buttonName}
+            </button>
+          )}
+        </div>
+        <Icon
+          size={340}
+          name={icon}
+          color={darkMode ? vars.color.white : vars.color.black1}
+        />
       </div>
-      <div className={guideInfoIcon}>{icon}</div>
     </div>
   );
 }
