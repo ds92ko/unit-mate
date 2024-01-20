@@ -1,7 +1,7 @@
-import React from 'react';
-import { keyboardButton, keyboardButtonText } from './index.css';
+import { ButtonHTMLAttributes } from 'react';
+import { keyboardButton, keyboardButtonText, resultButton } from './index.css';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   gridArea: string;
 }
@@ -15,7 +15,9 @@ function KeyButton({ label, gridArea, ...props }: ButtonProps) {
     <button
       type="button"
       style={buttonStyle}
-      className={`${keyboardButton} ${props.className}`}
+      value={label}
+      {...props}
+      className={`${keyboardButton} ${label === 'result' ? resultButton : ''}`}
     >
       <span className={keyboardButtonText}>{label}</span>
     </button>

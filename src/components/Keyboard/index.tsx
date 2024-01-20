@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
+import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
-import KeyButton from './button';
-import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
+import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
 
 const keyboardButtons = {
   basic: [
@@ -19,7 +19,7 @@ const keyboardButtons = {
     { label: '-', gridArea: 'minus' },
     { label: '0', gridArea: 'zero' },
     { label: '.', gridArea: 'dot' },
-    { label: '=', gridArea: 'result', className: resultButton }
+    { label: '=', gridArea: 'result' }
   ],
   alternate: [
     { label: '7', gridArea: 'seven' },
@@ -35,7 +35,7 @@ const keyboardButtons = {
     { label: '3', gridArea: 'three' },
     { label: ',', gridArea: 'comma' },
     { label: '0', gridArea: 'zero' },
-    { label: '=', gridArea: 'result', className: resultButton }
+    { label: '=', gridArea: 'result' }
   ]
 };
 
@@ -46,15 +46,19 @@ function Keyboard() {
   const keyboardWrapClassName = isBasic ? keyboardWrapBasic : keyboardWrap;
   const buttonKey = isBasic ? 'basic' : 'alternate';
 
+  const handleClickKey = () => {
+    console.log('clidk');
+  };
+
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
       <div className={keyboardWrapClassName}>
-        {keyboardButtons[buttonKey].map(({ label, gridArea, className }) => (
+        {keyboardButtons[buttonKey].map(({ label, gridArea }) => (
           <KeyButton
             key={gridArea}
             label={label}
             gridArea={gridArea}
-            className={className}
+            onClick={handleClickKey}
           />
         ))}
       </div>
