@@ -2,7 +2,7 @@ import { borderBox } from '@/styles/layout.css';
 import KeyButton from './button';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
 
-function Keybord() {
+function Keyboard() {
   const currentPath = window.location.pathname;
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
@@ -131,4 +131,4 @@ function Keybord() {
   );
 }
 
-export default Keybord;
+export default Keyboard;

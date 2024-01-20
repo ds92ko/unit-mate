@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-export const resultcontainer = style({
+export const resultContainer = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

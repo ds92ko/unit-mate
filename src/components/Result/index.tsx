@@ -1,16 +1,17 @@
-import { useState } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
-import { resultcontainer } from './index.css';
-import TogglButton from '@/components/ToggleButton';
+import { resultContainer } from './index.css';
+import ToggleButton from '@/components/ToggleButton';
 import { bookmarkList } from '@/components/Bookmark/index.css';
 import History from '@/components/History';
 import { DataType } from '@/components/Main/type';
 import Input from '@/components/Input';
+import { useToggleStore } from '@/stores/toggleStore';
 
 function Result({ data }: DataType) {
-  const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
+  const { toggleState, toggle } = useToggleStore();
+
   return (
-    <div className={`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
+    <div className={`${borderBox} ${resultContainer} ${toggleState.result ? 'isOpen' : ''}`}>
       <div className={scrollY}>
         <ul>
           {data &&
@@ -30,10 +31,9 @@ function Result({ data }: DataType) {
         </ul>
       </div>
       <Input />
-      <TogglButton
+      <ToggleButton
         direction="vertical"
-        isResultOpen={isResultOpen}
-        setiIsResultOpen={setiIsResultOpen}
+        onClick={() => toggle('result')}
       />
     </div>
   );

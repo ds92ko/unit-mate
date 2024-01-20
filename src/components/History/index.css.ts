@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { bookmarkList } from '@/components/Bookmark/index.css';
-import { resultcontainer } from '@/components/Result/index.css';
+import { resultContainer } from '@/components/Result/index.css';
 
 export const historyWrap = style({
   display: 'flex',
@@ -26,7 +26,7 @@ export const historyInput = style({
   color: 'var(--theme-color)',
   opacity: 0.5,
   selectors: {
-    [`${resultcontainer} &`]: {
+    [`${resultContainer} &`]: {
       fontSize: 28
     },
     [`${bookmarkList}.recentHistory &`]: {
@@ -41,7 +41,7 @@ export const historyResult = style({
   fontWeight: 'bold',
   textAlign: 'right',
   selectors: {
-    [`${resultcontainer} &`]: {
+    [`${resultContainer} &`]: {
       fontSize: 32
     },
     [`${bookmarkList}.recentHistory &`]: {
