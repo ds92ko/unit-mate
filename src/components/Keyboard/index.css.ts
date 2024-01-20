@@ -15,17 +15,27 @@ export const keyboardContainer = style({
 export const keyboardWrap = style({
   display: 'grid',
   gridTemplateRows: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateAreas: `
+  "seven eight nine ac"
+  "four five six dot"
+  "one two three comma"
+  "zero zero result result"
+  `,
   height: '100%'
 });
 
-export const keyboardItemsBasic = style({
+export const keyboardWrapBasic = style({
   display: 'grid',
+  gridTemplateRows: 'repeat(4, 1fr)',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  selectors: {
-    [`&:last-child`]: {
-      gridTemplateColumns: '2fr 2fr'
-    }
-  }
+  gridTemplateAreas: `
+  "ac ac percent plus"
+  "seven eight nine multiply"
+  "four five six minus"
+  "zero dot result result"
+  `,
+  height: '100%'
 });
 
 export const keyboardItems = style({

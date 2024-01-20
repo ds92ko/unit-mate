@@ -1,73 +1,131 @@
 import { borderBox } from '@/styles/layout.css';
 import KeyButton from './KeyButton';
-import {
-  keyboardContainer,
-  keyboardWrap,
-  keyboardItemsBasic,
-  keyboardItems,
-  resultButton
-} from './index.css';
+import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
 
 function Keybord() {
   const currentPath = window.location.pathname;
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
       {currentPath === '/' ? (
-        <ul className={keyboardWrap}>
-          <li className={keyboardItemsBasic}>
-            <KeyButton label="7" />
-            <KeyButton label="8" />
-            <KeyButton label="9" />
-            <KeyButton label="AC" />
-          </li>
-          <li className={keyboardItemsBasic}>
-            <KeyButton label="4" />
-            <KeyButton label="5" />
-            <KeyButton label="6" />
-            <KeyButton label="." />
-          </li>
-          <li className={keyboardItemsBasic}>
-            <KeyButton label="1" />
-            <KeyButton label="2" />
-            <KeyButton label="3" />
-            <KeyButton label="," />
-          </li>
-          <li className={keyboardItemsBasic}>
-            <KeyButton label="0" />
-            <KeyButton
-              addClassName={resultButton}
-              label="="
-            />
-          </li>
-        </ul>
+        <div className={keyboardWrapBasic}>
+          <KeyButton
+            label="AC"
+            gridArea="ac"
+          />
+          <KeyButton
+            label="%"
+            gridArea="percent"
+          />
+          <KeyButton
+            label="+"
+            gridArea="plus"
+          />
+          <KeyButton
+            label="7"
+            gridArea="seven"
+          />
+          <KeyButton
+            label="8"
+            gridArea="eight"
+          />
+          <KeyButton
+            label="9"
+            gridArea="nine"
+          />
+          <KeyButton
+            label="x"
+            gridArea="multiply"
+          />
+          <KeyButton
+            label="4"
+            gridArea="four"
+          />
+          <KeyButton
+            label="5"
+            gridArea="five"
+          />
+          <KeyButton
+            label="6"
+            gridArea="six"
+          />
+          <KeyButton
+            label="-"
+            gridArea="minus"
+          />
+          <KeyButton
+            label="0"
+            gridArea="zero"
+          />
+          <KeyButton
+            label="."
+            gridArea="dot"
+          />
+          <KeyButton
+            label="="
+            gridArea="result"
+            className={resultButton}
+          />
+        </div>
       ) : (
-        <ul className={keyboardWrap}>
-          <li className={keyboardItems}>
-            <KeyButton label="AC" />
-            <KeyButton label="%" />
-            <KeyButton label="+" />
-          </li>
-          <li className={keyboardItems}>
-            <KeyButton label="7" />
-            <KeyButton label="8" />
-            <KeyButton label="9" />
-            <KeyButton label="x" />
-          </li>
-          <li className={keyboardItems}>
-            <KeyButton label="4" />
-            <KeyButton label="5" />
-            <KeyButton label="6" />
-            <KeyButton label="-" />
-          </li>
-          <li className={keyboardItems}>
-            <KeyButton label="0" />
-            <KeyButton label="." />
-            <KeyButton
-              addClassName={resultButton}
-              label="="
-            />
-          </li>
-        </ul>
+        <div className={keyboardWrap}>
+          <KeyButton
+            label="7"
+            gridArea="seven"
+          />
+          <KeyButton
+            label="8"
+            gridArea="eight"
+          />
+          <KeyButton
+            label="9"
+            gridArea="nine"
+          />
+          <KeyButton
+            label="AC"
+            gridArea="ac"
+          />
+          <KeyButton
+            label="4"
+            gridArea="four"
+          />
+          <KeyButton
+            label="5"
+            gridArea="five"
+          />
+          <KeyButton
+            label="6"
+            gridArea="six"
+          />
+          <KeyButton
+            label="."
+            gridArea="dot"
+          />
+          <KeyButton
+            label="1"
+            gridArea="one"
+          />
+          <KeyButton
+            label="2"
+            gridArea="two"
+          />
+          <KeyButton
+            label="3"
+            gridArea="three"
+          />
+          <KeyButton
+            label=","
+            gridArea="comma"
+          />
+          <KeyButton
+            label="0"
+            gridArea="zero"
+          />
+          <KeyButton
+            label="="
+            gridArea="result"
+            className={resultButton}
+          />
+        </div>
       )}
     </div>
   );
