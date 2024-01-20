@@ -7,14 +7,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 function KeyButton({ label, gridArea, ...props }: ButtonProps) {
-  const buttonStyle = {
-    gridArea
-  };
-
   return (
     <button
       type="button"
-      style={buttonStyle}
+      style={{ gridArea }}
       value={label}
       {...props}
       className={`${keyboardButton} ${label === 'result' ? resultButton : ''}`}

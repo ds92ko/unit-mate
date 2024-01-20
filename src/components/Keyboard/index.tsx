@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
+import { MouseEvent } from 'react';
 import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
@@ -46,8 +47,8 @@ function Keyboard() {
   const keyboardWrapClassName = isBasic ? keyboardWrapBasic : keyboardWrap;
   const buttonKey = isBasic ? 'basic' : 'alternate';
 
-  const handleClickKey = () => {
-    console.log('clidk');
+  const handleClickKey = (event: MouseEvent<HTMLButtonElement>) => {
+    console.log(event.currentTarget.value);
   };
 
   return (
