@@ -1,100 +1,50 @@
-import { create } from 'zustand';
+import create from 'zustand';
+import { persist } from 'zustand/middleware';
 import { HistoryType } from '@/components/History/type';
 
-type HistoryDataType = {
-  type: string;
-  data: HistoryType[];
-};
-
-export interface HistoryStoreType {
-  historyData: HistoryDataType[];
-  bookmarkedData: HistoryType[];
+interface HistoryStore {
   activeTab: string;
+  bookmarks: { [key: string]: HistoryType[] };
   setActiveTab: (tab: string) => void;
-  toggleBookmark: (itemId: number) => void;
+  toggleBookmark: (bookmark: HistoryType) => void;
 }
 
-export const useHistoryStore = create<HistoryStoreType>(set => ({
-  historyData: [
-    {
-      type: 'Basic',
-      data: [
-        {
-          id: 0,
-          input: '1+3',
-          result: '4',
-          isBookmark: false
-        },
-        {
-          id: 1,
-          input: '2+3',
-          result: '5',
-          isBookmark: false
-        },
-        {
-          id: 2,
-          input: '3+3',
-          result: '6',
-          isBookmark: false
-        },
-        {
-          id: 3,
-          input: '4+3',
-          result: '7',
-          isBookmark: false
-        },
-        {
-          id: 4,
-          input: '5+3',
-          result: '8',
-          isBookmark: false
-        }
-      ]
-    },
-    {
-      type: 'Percent',
-      data: []
-    },
-    {
-      type: 'Viewport',
-      data: []
-    },
-    {
-      type: 'REM & EM',
-      data: []
-    }
-  ],
-  bookmarkedData: [],
-  activeTab: 'Basic',
-  setActiveTab: tab => {
-    set(() => ({
-      activeTab: tab
-    }));
-  },
-  toggleBookmark: itemId => {
-    set(state => {
-      const updatedHistoryData = state.historyData.map(historyItem => {
-        if (historyItem.type === state.activeTab) {
-          const updatedData = historyItem.data.map(item =>
-            item.id === itemId ? { ...item, isBookmark: !item.isBookmark } : item
+export const useHistoryStore = create(
+  persist<HistoryStore>(
+    set => ({
+      activeTab: 'Basic',
+      bookmarks: {},
+      setActiveTab: tab => set({ activeTab: tab }),
+      toggleBookmark: clickedBookmark =>
+        set(state => {
+          const { activeTab, bookmarks } = state;
+
+          const updatedBookmarks = bookmarks[activeTab] || [];
+          const existingBookmarkIndex = updatedBookmarks.findIndex(
+            bookmark => bookmark.id === clickedBookmark.id
           );
-          return { ...historyItem, data: updatedData };
-        }
-        return historyItem;
-      });
 
-      const bookmarkedData = updatedHistoryData
-        .flatMap(historyItem => historyItem.data.filter(item => item.isBookmark))
-        .map(item => ({
-          id: item.id,
-          input: item.input,
-          result: item.result,
-          isBookmark: item.isBookmark
-        }));
+          if (existingBookmarkIndex !== -1) {
+            const updatedBookmark = {
+              ...updatedBookmarks[existingBookmarkIndex],
+              isBookmark: !clickedBookmark.isBookmark
+            };
 
-      localStorage.setItem('bookmarkedData', JSON.stringify(bookmarkedData));
+            updatedBookmarks[existingBookmarkIndex] = updatedBookmark;
+          } else {
+            const newBookmark: HistoryType = { ...clickedBookmark, isBookmark: true };
+            updatedBookmarks.push(newBookmark);
+          }
 
-      return { historyData: updatedHistoryData, bookmarkedData };
-    });
-  }
-}));
+          return {
+            ...state,
+            bookmarks: {
+              ...bookmarks,
+              [activeTab]: updatedBookmarks
+            }
+          };
+        })
+    }),
+    { name: 'bookmarkStore' }
+  )
+);
