@@ -4,11 +4,12 @@ import {
   guideInfoButton,
   guideInfoContainer,
   guideInfoDescription,
-  guideInfoIcon,
   guideInfoTitle
 } from './index.css';
 import { GuideInfoType } from './type';
 import { useThemeStore } from '@/stores/themeStore';
+import Icon from '@/components//Icon';
+import vars from '@/styles/vars.css';
 
 function GuideInfo({
   title,
@@ -21,13 +22,8 @@ function GuideInfo({
   const navigate = useNavigate();
   const { darkMode } = useThemeStore();
 
-  const onChangeNavigate = (eventType: string) => {
-    if (eventType === 'main') {
-      navigate('/');
-    } else {
-      navigate(-1);
-    }
-  };
+  const routePath = navigateType === 'main' ? '/' : '-1';
+
   return (
     <div className={`${guideInfoContainer} ${darkMode && 'themeDark'}`}>
       <div className={`${guideInfo} ${isMaintenance && 'isMaintenance'}`}>
@@ -38,13 +34,17 @@ function GuideInfo({
             <button
               className={guideInfoButton}
               type="button"
-              onClick={() => navigateType && onChangeNavigate(navigateType)}
+              onClick={() => navigate(routePath)}
             >
               {buttonName}
             </button>
           )}
         </div>
-        <div className={guideInfoIcon}>{icon}</div>
+        <Icon
+          size={340}
+          name={icon}
+          color={darkMode ? vars.color.white : vars.color.black1}
+        />
       </div>
     </div>
   );
