@@ -22,13 +22,8 @@ function GuideInfo({
   const navigate = useNavigate();
   const { darkMode } = useThemeStore();
 
-  const onChangeNavigate = (eventType: string) => {
-    if (eventType === 'main') {
-      navigate('/');
-    } else {
-      navigate(-1);
-    }
-  };
+  const routePath = navigateType === 'main' ? '/' : '-1';
+
   return (
     <div className={`${guideInfoContainer} ${darkMode && 'themeDark'}`}>
       <div className={`${guideInfo} ${isMaintenance && 'isMaintenance'}`}>
@@ -39,7 +34,7 @@ function GuideInfo({
             <button
               className={guideInfoButton}
               type="button"
-              onClick={() => navigateType && onChangeNavigate(navigateType)}
+              onClick={() => navigate(routePath)}
             >
               {buttonName}
             </button>

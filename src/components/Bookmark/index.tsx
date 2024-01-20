@@ -24,7 +24,7 @@ function Bookmark() {
               {bookmarkedData.map(({ id, input, result, isBookmark }) => (
                 <li
                   className={bookmarkList}
-                  key={`${id}_bookmark`}
+                  key={id}
                 >
                   <History
                     id={id}
