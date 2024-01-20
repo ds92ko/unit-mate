@@ -21,7 +21,7 @@ export const srOnly = style({
 
 export const scrollY = style({
   overflowY: 'auto',
-  maxHeight: 'calc(100% - 32px)',
+  maxHeight: 'calc(100% - 150px)',
   '::-webkit-scrollbar': {
     width: 12,
     height: 12,
