@@ -3,4 +3,5 @@ export interface HistoryType {
   input: string;
   result: string;
   isBookmark: boolean;
+  onToggleBookmark?: () => void;
 }
