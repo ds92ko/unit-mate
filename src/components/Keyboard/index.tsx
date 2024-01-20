@@ -1,5 +1,5 @@
 import { borderBox } from '@/styles/layout.css';
-import KeyButton from './KeyButton';
+import KeyButton from './button';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
 
 function Keybord() {
