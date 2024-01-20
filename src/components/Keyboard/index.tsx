@@ -1,132 +1,63 @@
+import { useLocation } from 'react-router-dom';
+
 import { borderBox } from '@/styles/layout.css';
 import KeyButton from './button';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
 
+const keyboardButtons = {
+  basic: [
+    { label: 'AC', gridArea: 'ac' },
+    { label: '%', gridArea: 'percent' },
+    { label: '+', gridArea: 'plus' },
+    { label: '7', gridArea: 'seven' },
+    { label: '8', gridArea: 'eight' },
+    { label: '9', gridArea: 'nine' },
+    { label: 'x', gridArea: 'multiply' },
+    { label: '4', gridArea: 'four' },
+    { label: '5', gridArea: 'five' },
+    { label: '6', gridArea: 'six' },
+    { label: '-', gridArea: 'minus' },
+    { label: '0', gridArea: 'zero' },
+    { label: '.', gridArea: 'dot' },
+    { label: '=', gridArea: 'result', className: resultButton }
+  ],
+  alternate: [
+    { label: '7', gridArea: 'seven' },
+    { label: '8', gridArea: 'eight' },
+    { label: '9', gridArea: 'nine' },
+    { label: 'AC', gridArea: 'ac' },
+    { label: '4', gridArea: 'four' },
+    { label: '5', gridArea: 'five' },
+    { label: '6', gridArea: 'six' },
+    { label: '.', gridArea: 'dot' },
+    { label: '1', gridArea: 'one' },
+    { label: '2', gridArea: 'two' },
+    { label: '3', gridArea: 'three' },
+    { label: ',', gridArea: 'comma' },
+    { label: '0', gridArea: 'zero' },
+    { label: '=', gridArea: 'result', className: resultButton }
+  ]
+};
+
 function Keyboard() {
-  const currentPath = window.location.pathname;
+  const location = useLocation();
+  const { pathname } = location;
+  const isBasic = pathname === '/';
+  const keyboardWrapClassName = isBasic ? keyboardWrapBasic : keyboardWrap;
+  const buttonKey = isBasic ? 'basic' : 'alternate';
+
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
-      {currentPath === '/' ? (
-        <div className={keyboardWrapBasic}>
+      <div className={keyboardWrapClassName}>
+        {keyboardButtons[buttonKey].map(({ label, gridArea, className }) => (
           <KeyButton
-            label="AC"
-            gridArea="ac"
+            key={gridArea}
+            label={label}
+            gridArea={gridArea}
+            className={className}
           />
-          <KeyButton
-            label="%"
-            gridArea="percent"
-          />
-          <KeyButton
-            label="+"
-            gridArea="plus"
-          />
-          <KeyButton
-            label="7"
-            gridArea="seven"
-          />
-          <KeyButton
-            label="8"
-            gridArea="eight"
-          />
-          <KeyButton
-            label="9"
-            gridArea="nine"
-          />
-          <KeyButton
-            label="x"
-            gridArea="multiply"
-          />
-          <KeyButton
-            label="4"
-            gridArea="four"
-          />
-          <KeyButton
-            label="5"
-            gridArea="five"
-          />
-          <KeyButton
-            label="6"
-            gridArea="six"
-          />
-          <KeyButton
-            label="-"
-            gridArea="minus"
-          />
-          <KeyButton
-            label="0"
-            gridArea="zero"
-          />
-          <KeyButton
-            label="."
-            gridArea="dot"
-          />
-          <KeyButton
-            label="="
-            gridArea="result"
-            className={resultButton}
-          />
-        </div>
-      ) : (
-        <div className={keyboardWrap}>
-          <KeyButton
-            label="7"
-            gridArea="seven"
-          />
-          <KeyButton
-            label="8"
-            gridArea="eight"
-          />
-          <KeyButton
-            label="9"
-            gridArea="nine"
-          />
-          <KeyButton
-            label="AC"
-            gridArea="ac"
-          />
-          <KeyButton
-            label="4"
-            gridArea="four"
-          />
-          <KeyButton
-            label="5"
-            gridArea="five"
-          />
-          <KeyButton
-            label="6"
-            gridArea="six"
-          />
-          <KeyButton
-            label="."
-            gridArea="dot"
-          />
-          <KeyButton
-            label="1"
-            gridArea="one"
-          />
-          <KeyButton
-            label="2"
-            gridArea="two"
-          />
-          <KeyButton
-            label="3"
-            gridArea="three"
-          />
-          <KeyButton
-            label=","
-            gridArea="comma"
-          />
-          <KeyButton
-            label="0"
-            gridArea="zero"
-          />
-          <KeyButton
-            label="="
-            gridArea="result"
-            className={resultButton}
-          />
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
