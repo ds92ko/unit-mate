@@ -2,6 +2,17 @@ import { style } from '@vanilla-extract/css';
 import vars from '@/styles/vars.css';
 import { pretendard } from '@/styles/global.css';
 
+export const guideInfoContainer = style({
+  position: 'relative',
+  width: '100vw',
+  height: '100vh',
+  selectors: {
+    '&.themeDark': {
+      backgroundColor: vars.color.black1
+    }
+  }
+});
+
 export const guideInfo = style({
   display: 'flex',
   width: '100%',
@@ -34,6 +45,9 @@ export const guideInfoTitle = style({
   selectors: {
     [`${guideInfo}.isMaintenance &`]: {
       textAlign: 'center'
+    },
+    [`${guideInfoContainer}.themeDark &`]: {
+      color: vars.color.white
     }
   }
 });
@@ -49,6 +63,9 @@ export const guideInfoDescription = style({
     [`${guideInfo}.isMaintenance &`]: {
       marginTop: 31,
       textAlign: 'center'
+    },
+    [`${guideInfoContainer}.themeDark &`]: {
+      color: vars.color.white
     }
   }
 });
@@ -65,12 +82,10 @@ export const guideInfoButton = style({
   selectors: {
     [`${guideInfoDescription} + &`]: {
       marginTop: 46
+    },
+    [`${guideInfoContainer}.themeDark &`]: {
+      color: vars.color.black1,
+      backgroundColor: vars.color.white
     }
   }
-});
-
-export const guideInfoIcon = style({
-  width: 342,
-  height: 303,
-  border: `1px solid ${vars.color.black}`
 });

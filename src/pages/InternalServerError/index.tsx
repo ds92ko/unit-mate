@@ -7,7 +7,7 @@ function InternalServerError() {
       buttonName="이전 페이지"
       navigateType="prev"
       isMaintenance={false}
-      icon="internal server error"
+      icon="internalServerError"
     />
   );
 }

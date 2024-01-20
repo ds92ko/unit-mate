@@ -10,7 +10,7 @@ function NotFound() {
       buttonName="메인 페이지"
       navigateType="main"
       isMaintenance={false}
-      icon="404"
+      icon="notFound"
     />
   );
 }

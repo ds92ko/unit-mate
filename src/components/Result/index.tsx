@@ -5,6 +5,7 @@ import TogglButton from '@/components/ToggleButton';
 import { bookmarkList } from '@/components/Bookmark/index.css';
 import History from '@/components/History';
 import { DataType } from '@/components/Main/type';
+import Input from '@/components/Input';
 
 function Result({ data }: DataType) {
   const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
@@ -28,6 +29,7 @@ function Result({ data }: DataType) {
             ))}
         </ul>
       </div>
+      <Input />
       <TogglButton
         direction="vertical"
         isResultOpen={isResultOpen}

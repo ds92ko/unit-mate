@@ -38,3 +38,8 @@ globalStyle('a', {
   textDecoration: 'none',
   color: 'inherit'
 });
+
+globalStyle('input', {
+  border: 'none',
+  backgroundColor: 'transparent'
+});
