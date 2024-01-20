@@ -1,15 +1,9 @@
 import { style } from '@vanilla-extract/css';
-import { resultcontainer } from '@/components/Result/index.css';
 
 export const keyboardContainer = style({
   flexGrow: 1,
   visibility: 'visible',
-  transition: 'all ease-in-out 0.1s',
-  selectors: {
-    [`${resultcontainer}.isOpen + &`]: {
-      visibility: 'hidden'
-    }
-  }
+  transition: 'all ease-in-out 0.1s'
 });
 
 export const keyboardWrap = style({

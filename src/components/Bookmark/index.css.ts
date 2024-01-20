@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { resultcontainer } from '@/components/Result/index.css';
+import { resultContainer } from '@/components/Result/index.css';
 
 export const bookmarkContainer = style({
   padding: '29px 0',
@@ -11,7 +11,7 @@ export const bookmarkList = style({
     '& + &': {
       marginTop: 10
     },
-    [`${resultcontainer} & + &`]: {
+    [`${resultContainer} & + &`]: {
       marginTop: 34
     }
   }
