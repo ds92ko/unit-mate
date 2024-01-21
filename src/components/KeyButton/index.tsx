@@ -11,7 +11,6 @@ function KeyButton({ label, gridArea, ...props }: ButtonProps) {
     <button
       type="button"
       style={{ gridArea }}
-      value={label}
       {...props}
       className={`${keyboardButton} ${label === 'result' ? resultButton : ''}`}
     >

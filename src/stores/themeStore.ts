@@ -9,8 +9,8 @@ type ThemeStore = {
   setThemeColor: (themeColor: string) => void;
 };
 
-export const useThemeStore = create(
-  persist<ThemeStore>(
+export const useThemeStore = create<ThemeStore>()(
+  persist(
     set => ({
       darkMode: false,
       themeColor: vars.color.black1,
