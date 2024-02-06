@@ -1,134 +1,124 @@
+import { MouseEvent } from 'react';
+import uuid from 'react-uuid';
+import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
-import KeyButton from './button';
-import { keyboardContainer, keyboardWrap, keyboardWrapBasic, resultButton } from './index.css';
+import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
+import { useCalcStore } from '@/stores/calcStore';
+import { useRouteStore } from '@/stores/routeStore';
+import { useHistoryStore } from '@/stores/historyStore';
 
-function Keybord() {
-  const currentPath = window.location.pathname;
+const keyboardButtons = {
+  basic: [
+    { label: 'AC', value: 'esc', gridArea: 'clearAll' },
+    { label: '%', gridArea: 'remainder' },
+    { label: '+', gridArea: 'add' },
+    { label: '7', gridArea: 'seven' },
+    { label: '8', gridArea: 'eight' },
+    { label: '9', gridArea: 'nine' },
+    { label: 'x', value: '*', gridArea: 'multiply' },
+    { label: '4', gridArea: 'four' },
+    { label: '5', gridArea: 'five' },
+    { label: '6', gridArea: 'six' },
+    { label: '-', gridArea: 'subtract' },
+    { label: '0', gridArea: 'zero' },
+    { label: '.', gridArea: 'dot' },
+    { label: '=', value: 'enter', gridArea: 'result' }
+  ],
+  alternate: [
+    { label: '7', gridArea: 'seven' },
+    { label: '8', gridArea: 'eight' },
+    { label: '9', gridArea: 'nine' },
+    { label: 'AC', value: 'esc', gridArea: 'clearAll' },
+    { label: '4', gridArea: 'four' },
+    { label: '5', gridArea: 'five' },
+    { label: '6', gridArea: 'six' },
+    { label: '.', gridArea: 'dot' },
+    { label: '1', gridArea: 'one' },
+    { label: '2', gridArea: 'two' },
+    { label: '3', gridArea: 'three' },
+    { label: ',', gridArea: 'comma' },
+    { label: '0', gridArea: 'zero' },
+    { label: '=', value: 'enter', gridArea: 'result' }
+  ]
+};
+
+type Calc = {
+  [key: string]: () => { inputs: string[] | null; results: string[] | null };
+};
+
+function Keyboard() {
+  const { currentRoute } = useRouteStore();
+  const { index, key } = currentRoute;
+  const keyboardWrapClassName = index ? keyboardWrapBasic : keyboardWrap;
+  const buttonKey = index ? 'basic' : 'alternate';
+  const { setResultHistory } = useHistoryStore();
+  const { calcValue, setCalcValue, resetCalcValue } = useCalcStore();
+
+  const calc: Calc = {
+    percent: () => {
+      const valueArray = calcValue.percent.split(',');
+      const firstValue = Number(valueArray[0]);
+      const lastValue = Number(valueArray[1]);
+
+      if (calcValue.percent.length === 0 || valueArray.length < 2 || !valueArray[1]) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+
+      const toUnit = (lastValue / firstValue) * 100;
+      const toPx = (lastValue / 100) * firstValue;
+
+      return {
+        inputs: [`${firstValue}의 ${lastValue}`, `${firstValue}의 ${lastValue}%`],
+        results: [`${toUnit}%`, `${toPx}`]
+      };
+    }
+  };
+
+  const handleClickKey = (e: MouseEvent<HTMLButtonElement>) => {
+    const { value } = e.currentTarget;
+    switch (value) {
+      case 'esc':
+        resetCalcValue(key);
+
+        break;
+      case 'enter':
+        const { inputs, results } = calc[key]();
+
+        if (inputs && results) {
+          setResultHistory(key, {
+            id: uuid(),
+            inputs,
+            results,
+            isBookmark: false
+          });
+        }
+        resetCalcValue(key);
+
+        break;
+      default:
+        setCalcValue(key, value);
+        break;
+    }
+  };
+
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
-      {currentPath === '/' ? (
-        <div className={keyboardWrapBasic}>
+      <div className={keyboardWrapClassName}>
+        {keyboardButtons[buttonKey].map(({ label, value, gridArea }) => (
           <KeyButton
-            label="AC"
-            gridArea="ac"
+            key={gridArea}
+            label={label}
+            value={value || label}
+            gridArea={gridArea}
+            onClick={handleClickKey}
           />
-          <KeyButton
-            label="%"
-            gridArea="percent"
-          />
-          <KeyButton
-            label="+"
-            gridArea="plus"
-          />
-          <KeyButton
-            label="7"
-            gridArea="seven"
-          />
-          <KeyButton
-            label="8"
-            gridArea="eight"
-          />
-          <KeyButton
-            label="9"
-            gridArea="nine"
-          />
-          <KeyButton
-            label="x"
-            gridArea="multiply"
-          />
-          <KeyButton
-            label="4"
-            gridArea="four"
-          />
-          <KeyButton
-            label="5"
-            gridArea="five"
-          />
-          <KeyButton
-            label="6"
-            gridArea="six"
-          />
-          <KeyButton
-            label="-"
-            gridArea="minus"
-          />
-          <KeyButton
-            label="0"
-            gridArea="zero"
-          />
-          <KeyButton
-            label="."
-            gridArea="dot"
-          />
-          <KeyButton
-            label="="
-            gridArea="result"
-            className={resultButton}
-          />
-        </div>
-      ) : (
-        <div className={keyboardWrap}>
-          <KeyButton
-            label="7"
-            gridArea="seven"
-          />
-          <KeyButton
-            label="8"
-            gridArea="eight"
-          />
-          <KeyButton
-            label="9"
-            gridArea="nine"
-          />
-          <KeyButton
-            label="AC"
-            gridArea="ac"
-          />
-          <KeyButton
-            label="4"
-            gridArea="four"
-          />
-          <KeyButton
-            label="5"
-            gridArea="five"
-          />
-          <KeyButton
-            label="6"
-            gridArea="six"
-          />
-          <KeyButton
-            label="."
-            gridArea="dot"
-          />
-          <KeyButton
-            label="1"
-            gridArea="one"
-          />
-          <KeyButton
-            label="2"
-            gridArea="two"
-          />
-          <KeyButton
-            label="3"
-            gridArea="three"
-          />
-          <KeyButton
-            label=","
-            gridArea="comma"
-          />
-          <KeyButton
-            label="0"
-            gridArea="zero"
-          />
-          <KeyButton
-            label="="
-            gridArea="result"
-            className={resultButton}
-          />
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
 
-export default Keybord;
+export default Keyboard;

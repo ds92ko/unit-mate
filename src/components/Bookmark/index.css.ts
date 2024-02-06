@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { resultcontainer } from '@/components/Result/index.css';
+import { resultContainer } from '@/components/Result/index.css';
 
 export const bookmarkContainer = style({
   padding: '29px 0',
@@ -11,7 +11,7 @@ export const bookmarkList = style({
     '& + &': {
       marginTop: 10
     },
-    [`${resultcontainer} & + &`]: {
+    [`${resultContainer} & + &`]: {
       marginTop: 34
     }
   }
@@ -29,9 +29,7 @@ export const bookmarkGuide = style({
 export const bookmark = style({
   minWidth: 0,
   maxWidth: 0,
-  minHeight: '100vh',
   overflow: 'hidden',
-  transition: 'all ease-in-out 0.3s',
   selectors: {
     [`${bookmarkContainer}.isOpen &`]: {
       padding: '0 28px',

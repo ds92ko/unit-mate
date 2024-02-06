@@ -1,10 +1,18 @@
 import { style } from '@vanilla-extract/css';
-import { bookmark } from '@/components/Bookmark/index.css';
+
+export const app = style({
+  width: '100%',
+  height: '100%',
+  display: 'grid',
+  gridTemplateRows: '82px 1fr',
+  gap: 42
+});
 
 export const container = style({
-  minWidth: 1440,
+  minWidth: 1496,
   padding: '0 40px',
-  margin: '0 auto'
+  margin: '0 auto',
+  height: '100%'
 });
 
 export const srOnly = style({
@@ -21,7 +29,6 @@ export const srOnly = style({
 
 export const scrollY = style({
   overflowY: 'auto',
-  maxHeight: 'calc(100% - 150px)',
   '::-webkit-scrollbar': {
     width: 12,
     height: 12,
@@ -31,11 +38,6 @@ export const scrollY = style({
     backgroundColor: 'var(--theme-color)',
     border: '4px solid var(--theme-background)',
     borderRadius: 14
-  },
-  selectors: {
-    [`${bookmark} &`]: {
-      maxHeight: 779
-    }
   }
 });
 

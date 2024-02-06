@@ -34,6 +34,7 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
     'no-trailing-spaces': 'error',
     'no-restricted-imports': ['error', { patterns: ['..*'] }],
+    'no-case-declarations': 'off',
     'eol-last': ['error', 'always'],
     'comma-dangle': ['error', 'never'],
 
@@ -44,6 +45,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-target-blank': 'error',
+    'react/jsx-props-no-spreading': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],

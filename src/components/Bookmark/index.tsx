@@ -1,45 +1,47 @@
-import { useState } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
 import { bookmark, bookmarkContainer, bookmarkGuide, bookmarkList } from './index.css';
 import History from '@/components/History';
-import TogglButton from '@/components/ToggleButton';
+import ToggleButton from '@/components/ToggleButton';
 import { useHistoryStore } from '@/stores/historyStore';
+import { useToggleStore } from '@/stores/toggleStore';
+import { useRouteStore } from '@/stores/routeStore';
 
 function Bookmark() {
-  const [isBookmarkOpen, setiIsBookmarkOpen] = useState<boolean>(true);
-  const { activeTab, bookmarks, toggleBookmark } = useHistoryStore();
-  const tabBookmarks = bookmarks[activeTab] || [];
+  const { toggleState, toggle } = useToggleStore();
+  const { currentRoute } = useRouteStore();
+  const { bookmarks } = useHistoryStore();
+  const tabBookmarks = bookmarks[currentRoute.key] || [];
 
   return (
-    <aside className={`${borderBox} ${bookmarkContainer} ${isBookmarkOpen ? 'isOpen' : ''}`}>
+    <aside className={`${borderBox} ${bookmarkContainer} ${toggleState.bookmark ? 'isOpen' : ''}`}>
       <div className={`${bookmark} ${scrollY}`}>
-        <div>
-          {tabBookmarks.length > 0 ? (
-            <ul>
-              {tabBookmarks.map(({ id, input, result, isBookmark }) => (
-                <li
-                  className={bookmarkList}
-                  key={id}
-                >
-                  <History
-                    id={id}
-                    input={input}
-                    result={result}
-                    isBookmark={isBookmark}
-                    onToggleBookmark={() => toggleBookmark({ id, input, result, isBookmark })}
-                  />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <span className={bookmarkGuide}>No Bookmark</span>
-          )}
-        </div>
+        {toggleState.bookmark && (
+          <div>
+            {tabBookmarks.length > 0 ? (
+              <ul>
+                {tabBookmarks.map(({ id, inputs, results, isBookmark }) => (
+                  <li
+                    className={bookmarkList}
+                    key={id}
+                  >
+                    <History
+                      id={id}
+                      inputs={inputs}
+                      results={results}
+                      isBookmark={isBookmark}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span className={bookmarkGuide}>No Bookmark</span>
+            )}
+          </div>
+        )}
       </div>
-      <TogglButton
+      <ToggleButton
         direction="horizontal"
-        isBookmarkOpen={isBookmarkOpen}
-        setiIsBookmarkOpen={setiIsBookmarkOpen}
+        onClick={() => toggle('bookmark')}
       />
     </aside>
   );

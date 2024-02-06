@@ -1,39 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { borderBox, scrollY } from '@/styles/layout.css';
-import { resultcontainer } from './index.css';
-import TogglButton from '@/components/ToggleButton';
+import { resultContainer } from './index.css';
+import ToggleButton from '@/components/ToggleButton';
 import { bookmarkList } from '@/components/Bookmark/index.css';
 import History from '@/components/History';
-import { DataType } from '@/components/Main/type';
 import Input from '@/components/Input';
+import { useToggleStore } from '@/stores/toggleStore';
+import { useCalcStore } from '@/stores/calcStore';
+import { useHistoryStore } from '@/stores/historyStore';
+import { useRouteStore } from '@/stores/routeStore';
 
-function Result({ data }: DataType) {
-  const [isResultOpen, setiIsResultOpen] = useState<boolean>(false);
+function Result() {
+  const { currentRoute } = useRouteStore();
+  const { key } = currentRoute;
+  const { toggle } = useToggleStore();
+  const { calcValue } = useCalcStore();
+  const { results: resultsHistory } = useHistoryStore();
+  const scrollYRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollYRef.current) scrollYRef.current.scrollTop = scrollYRef.current.scrollHeight;
+  }, [resultsHistory]);
+
   return (
-    <div className={`${borderBox} ${resultcontainer} ${isResultOpen ? 'isOpen' : ''}`}>
-      <div className={scrollY}>
+    <div className={`${borderBox} ${resultContainer}`}>
+      <div
+        ref={scrollYRef}
+        className={scrollY}
+      >
         <ul>
-          {data &&
-            data.map(({ id, input, result, isBookmark }) => (
+          {resultsHistory[key] &&
+            resultsHistory[key].map(({ id, inputs, results, isBookmark }) => (
               <li
-                className={`${bookmarkList} ${id && id + 1 === data.length ? 'recentHistory' : ''}`}
-                key={`${id}_result`}
+                className={`${bookmarkList} recentHistory`}
+                key={id}
               >
                 <History
                   id={id}
-                  input={input}
-                  result={result}
+                  inputs={inputs}
+                  results={results}
                   isBookmark={isBookmark}
                 />
               </li>
             ))}
         </ul>
       </div>
-      <Input />
-      <TogglButton
+      <Input value={calcValue[key]} />
+      <ToggleButton
         direction="vertical"
-        isResultOpen={isResultOpen}
-        setiIsResultOpen={setiIsResultOpen}
+        onClick={() => toggle('result')}
       />
     </div>
   );
