@@ -4,11 +4,13 @@ import History from '@/components/History';
 import ToggleButton from '@/components/ToggleButton';
 import { useHistoryStore } from '@/stores/historyStore';
 import { useToggleStore } from '@/stores/toggleStore';
+import { useRouteStore } from '@/stores/routeStore';
 
 function Bookmark() {
   const { toggleState, toggle } = useToggleStore();
-  const { activeTab, bookmarks, toggleBookmark } = useHistoryStore();
-  const tabBookmarks = bookmarks[activeTab] || [];
+  const { currentRoute } = useRouteStore();
+  const { bookmarks } = useHistoryStore();
+  const tabBookmarks = bookmarks[currentRoute.key] || [];
 
   return (
     <aside className={`${borderBox} ${bookmarkContainer} ${toggleState.bookmark ? 'isOpen' : ''}`}>
@@ -17,17 +19,16 @@ function Bookmark() {
           <div>
             {tabBookmarks.length > 0 ? (
               <ul>
-                {tabBookmarks.map(({ id, input, result, isBookmark }) => (
+                {tabBookmarks.map(({ id, inputs, results, isBookmark }) => (
                   <li
                     className={bookmarkList}
                     key={id}
                   >
                     <History
                       id={id}
-                      input={input}
-                      result={result}
+                      inputs={inputs}
+                      results={results}
                       isBookmark={isBookmark}
-                      onToggleBookmark={() => toggleBookmark({ id, input, result, isBookmark })}
                     />
                   </li>
                 ))}

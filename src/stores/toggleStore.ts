@@ -11,18 +11,18 @@ type ToggleStore = {
   toggle: (key: keyof ToggleState) => void;
 };
 
-export const useToggleStore = create(
-  persist<ToggleStore>(
+export const useToggleStore = create<ToggleStore>()(
+  persist(
     set => ({
       toggleState: {
         bookmark: true,
         result: false
       },
-      toggle: (key: keyof ToggleState) =>
-        set(state => ({
+      toggle: key =>
+        set(({ toggleState }) => ({
           toggleState: {
-            ...state.toggleState,
-            [key]: !state.toggleState[key]
+            ...toggleState,
+            [key]: !toggleState[key]
           }
         }))
     }),

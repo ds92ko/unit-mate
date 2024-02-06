@@ -3,23 +3,31 @@ import { persist } from 'zustand/middleware';
 import { HistoryType } from '@/components/History/type';
 
 interface HistoryStore {
-  activeTab: string;
+  results: { [key: string]: HistoryType[] };
   bookmarks: { [key: string]: HistoryType[] };
-  setActiveTab: (tab: string) => void;
-  toggleBookmark: (bookmark: HistoryType) => void;
+  setResultHistory: (key: string, result: HistoryType) => void;
+  setBookmarkHistory: (key: string, bookmark: HistoryType) => void;
 }
 
-export const useHistoryStore = create(
-  persist<HistoryStore>(
+export const useHistoryStore = create<HistoryStore>()(
+  persist(
     set => ({
-      activeTab: 'Basic',
+      results: {
+        percent: []
+      },
       bookmarks: {},
-      setActiveTab: tab => set({ activeTab: tab }),
-      toggleBookmark: clickedBookmark =>
+      setResultHistory: (key, result) =>
+        set(state => ({
+          results: {
+            ...state.results,
+            [key]: [...(state.results[key] || []), result]
+          }
+        })),
+      setBookmarkHistory: (key, clickedBookmark) =>
         set(state => {
-          const { activeTab, bookmarks } = state;
+          const { bookmarks } = state;
 
-          const updatedBookmarks = bookmarks[activeTab] || [];
+          const updatedBookmarks = bookmarks[key] || [];
           const existingBookmarkIndex = updatedBookmarks.findIndex(
             bookmark => bookmark.id === clickedBookmark.id
           );
@@ -40,11 +48,11 @@ export const useHistoryStore = create(
             ...state,
             bookmarks: {
               ...bookmarks,
-              [activeTab]: updatedBookmarks
+              [key]: updatedBookmarks
             }
           };
         })
     }),
-    { name: 'bookmarkStore' }
+    { name: 'historyStore', partialize: ({ bookmarks }) => ({ bookmarks }) }
   )
 );

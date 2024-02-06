@@ -11,10 +11,10 @@ export const keyboardWrap = style({
   gridTemplateRows: 'repeat(4, 1fr)',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateAreas: `
-  "seven eight nine ac"
-  "four five six dot"
-  "one two three comma"
-  "zero zero result result"
+    "seven eight nine   clearAll"
+    "four  five  six    dot     "
+    "one   two   three  comma   "
+    "zero  zero  result result  "
   `,
   height: '100%'
 });
@@ -24,10 +24,10 @@ export const keyboardWrapBasic = style({
   gridTemplateRows: 'repeat(4, 1fr)',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateAreas: `
-  "ac ac percent plus"
-  "seven eight nine multiply"
-  "four five six minus"
-  "zero dot result result"
+    "clearAll clearAll remainder add     "
+    "seven    eight    nine      multiply"
+    "four     five     six       subtract"
+    "zero     dot      result    result  "
   `,
   height: '100%'
 });
