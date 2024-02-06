@@ -13,7 +13,8 @@ export const useHistoryStore = create<HistoryStore>()(
   persist(
     set => ({
       results: {
-        percent: []
+        percent: [],
+        viewport: []
       },
       bookmarks: {},
       setResultHistory: (key, result) =>
