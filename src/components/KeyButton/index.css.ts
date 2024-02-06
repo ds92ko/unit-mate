@@ -5,7 +5,6 @@ export const keyboardButton = style({
   position: 'relative',
   alignItems: 'center',
   justifyContent: 'center',
-  minHeight: 64,
   margin: 10,
   borderRadius: 40,
   overflow: 'hidden',

@@ -7,7 +7,7 @@ export const themeMenu = style({
 export const themeList = style({
   display: 'flex',
   alignItems: 'center',
-  gap: 45
+  gap: 31
 });
 
 export const themeItem = style({});

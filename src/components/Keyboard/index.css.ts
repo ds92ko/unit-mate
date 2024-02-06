@@ -3,7 +3,7 @@ import { style } from '@vanilla-extract/css';
 export const keyboardContainer = style({
   flexGrow: 1,
   visibility: 'visible',
-  transition: 'all ease-in-out 0.1s'
+  height: 'calc((100vh - 201px) / 2)' // 201px = headerHeight 82 + headerMainGap 42 + mainPaddingBottom 42 + resultKeyboardGap 35
 });
 
 export const keyboardWrap = style({
