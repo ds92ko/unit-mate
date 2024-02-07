@@ -12,7 +12,9 @@ type CalcStore = {
 
 export const useCalcStore = create<CalcStore>(set => ({
   calcValue: {
-    percent: ''
+    percent: '',
+    viewport: '',
+    remAndEm: ''
   },
   setCalcValue: (key, value) =>
     set(({ calcValue }) => {

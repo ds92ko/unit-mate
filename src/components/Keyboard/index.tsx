@@ -72,7 +72,47 @@ function Keyboard() {
 
       return {
         inputs: [`${firstValue}의 ${lastValue}`, `${firstValue}의 ${lastValue}%`],
-        results: [`${toUnit}%`, `${toPx}`]
+        results: [`${Number(toUnit.toFixed(6))}%`, `${Number(toPx.toFixed(6))}`]
+      };
+    },
+    viewport: () => {
+      const valueArray = calcValue.viewport.split(',');
+      const firstValue = Number(valueArray[0]);
+      const lastValue = Number(valueArray[1]);
+
+      if (calcValue.viewport.length === 0 || valueArray.length < 2 || !valueArray[1]) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+
+      const toUnit = (lastValue / firstValue) * 100;
+      const toPx = (lastValue * firstValue) / 100;
+
+      return {
+        inputs: [`${firstValue}px, ${lastValue}px`, `${firstValue}px, ${lastValue}vw/vh`],
+        results: [`${Number(toUnit.toFixed(6))}vw/vh`, `${Number(toPx.toFixed(6))}px`]
+      };
+    },
+    remAndEm: () => {
+      const valueArray = calcValue.remAndEm.split(',');
+      const firstValue = Number(valueArray[0]);
+      const lastValue = Number(valueArray[1]);
+
+      if (calcValue.remAndEm.length === 0 || valueArray.length < 2 || !valueArray[1]) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+
+      const toUnit = lastValue / firstValue;
+      const toPx = lastValue * firstValue;
+
+      return {
+        inputs: [`${firstValue}px, ${lastValue}px`, `${firstValue}px, ${lastValue}rem/em`],
+        results: [`${Number(toUnit.toFixed(6))}rem/em`, `${Number(toPx.toFixed(6))}px`]
       };
     }
   };
