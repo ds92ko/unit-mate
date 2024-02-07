@@ -1,17 +1,19 @@
 import Bookmark from '@/components/Bookmark';
-import Keybord from '@/components/Keyboard';
+import Keyboard from '@/components/Keyboard';
 import Result from '@/components/Result';
 import { mainWrap, sectionWrap } from './index.css';
+import { useToggleStore } from '@/stores/toggleStore';
 
 function Main() {
+  const { toggleState } = useToggleStore();
   return (
-    <main className={mainWrap}>
+    <div className={mainWrap}>
       <Bookmark />
       <section className={sectionWrap}>
         <Result />
-        <Keybord />
+        {!toggleState.result && <Keyboard />}
       </section>
-    </main>
+    </div>
   );
 }
 

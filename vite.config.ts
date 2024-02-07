@@ -9,5 +9,8 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: resolve(__dirname, 'src') }]
   },
-  plugins: [react(), tsconfigPaths(), vanillaExtractPlugin()]
+  plugins: [react(), tsconfigPaths(), vanillaExtractPlugin()],
+  server: {
+    port: 3000
+  }
 });

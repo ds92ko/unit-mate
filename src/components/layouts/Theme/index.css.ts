@@ -6,5 +6,19 @@ export const themeMenu = style({
 
 export const themeList = style({
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  gap: 31
+});
+
+export const themeItem = style({});
+
+export const colorInput = style({
+  width: 0,
+  height: 0,
+  padding: 0,
+  visibility: 'hidden'
+});
+
+export const colorLabel = style({
+  cursor: 'pointer'
 });

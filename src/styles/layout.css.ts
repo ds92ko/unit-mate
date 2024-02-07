@@ -1,9 +1,18 @@
 import { style } from '@vanilla-extract/css';
 
+export const app = style({
+  width: '100%',
+  height: '100%',
+  display: 'grid',
+  gridTemplateRows: '82px 1fr',
+  gap: 42
+});
+
 export const container = style({
-  minWidth: 1440,
+  minWidth: 1496,
   padding: '0 40px',
-  margin: '0 auto'
+  margin: '0 auto',
+  height: '100%'
 });
 
 export const srOnly = style({
@@ -20,7 +29,16 @@ export const srOnly = style({
 
 export const scrollY = style({
   overflowY: 'auto',
-  maxHeight: 'calc(100% - 32px)'
+  '::-webkit-scrollbar': {
+    width: 12,
+    height: 12,
+    backgroundColor: 'transparent'
+  },
+  '::-webkit-scrollbar-thumb': {
+    backgroundColor: 'var(--theme-color)',
+    border: '4px solid var(--theme-background)',
+    borderRadius: 14
+  }
 });
 
 export const borderBox = style({

@@ -1,7 +1,11 @@
 import { style } from '@vanilla-extract/css';
 
-export const resultcontainer = style({
+export const resultContainer = style({
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
   position: 'relative',
-  padding: 16,
-  minHeight: '52.6%' /* Bookmark 높이 기준 Result 높이의 비율 계산 결과 */
+  padding: '36px 38px',
+  height: 'calc((100vh - 201px) / 2)' // 201px = headerHeight 82 + headerMainGap 42 + mainPaddingBottom 42 + resultKeyboardGap 35
 });

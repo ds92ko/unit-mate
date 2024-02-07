@@ -27,7 +27,7 @@ export const gnbItem = style({
     '&:has(.active)::after': {
       content: '',
       position: 'absolute',
-      bottom: -10,
+      top: 'calc(100% - 5px)',
       left: '50%',
       transform: 'translateX(-50%)',
       display: 'inline-block',
