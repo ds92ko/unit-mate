@@ -11,7 +11,7 @@ const keyboardButtons = {
   basic: [
     { label: 'AC', value: 'esc', gridArea: 'clearAll' },
     { label: '%', gridArea: 'remainder' },
-    { label: '+', gridArea: 'add' },
+    { label: '÷', value: '/', gridArea: 'divide' },
     { label: '7', gridArea: 'seven' },
     { label: '8', gridArea: 'eight' },
     { label: '9', gridArea: 'nine' },
@@ -20,6 +20,10 @@ const keyboardButtons = {
     { label: '5', gridArea: 'five' },
     { label: '6', gridArea: 'six' },
     { label: '-', gridArea: 'subtract' },
+    { label: '1', gridArea: 'one' },
+    { label: '2', gridArea: 'two' },
+    { label: '3', gridArea: 'three' },
+    { label: '+', gridArea: 'add' },
     { label: '0', gridArea: 'zero' },
     { label: '.', gridArea: 'dot' },
     { label: '=', value: 'enter', gridArea: 'result' }
