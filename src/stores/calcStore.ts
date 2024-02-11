@@ -12,6 +12,7 @@ type CalcStore = {
 
 export const useCalcStore = create<CalcStore>(set => ({
   calcValue: {
+    basic: '',
     percent: '',
     viewport: '',
     remAndEm: ''
@@ -20,13 +21,18 @@ export const useCalcStore = create<CalcStore>(set => ({
     set(({ calcValue }) => {
       const currentValue = calcValue[key] || '';
       const newValue = currentValue + value;
-      const newValueArr = newValue.split(',');
 
-      if (
-        newValueArr[0]?.startsWith('0') ||
-        newValueArr[1]?.startsWith('0') ||
-        newValueArr[0]?.startsWith('.') ||
-        newValueArr[1]?.startsWith('.')
+      if (key !== 'basic') {
+        const newValueArr = newValue.split(',');
+
+        if (newValueArr[0]?.startsWith('.') || newValueArr[1]?.startsWith('.')) {
+          return { calcValue };
+        }
+      } else if (
+        newValue.startsWith('/') ||
+        newValue.startsWith('*') ||
+        newValue.startsWith('%') ||
+        newValue.startsWith('+')
       ) {
         return { calcValue };
       }

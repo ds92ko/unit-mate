@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 import uuid from 'react-uuid';
+import * as math from 'mathjs';
 import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
@@ -11,7 +12,7 @@ const keyboardButtons = {
   basic: [
     { label: 'AC', value: 'esc', gridArea: 'clearAll' },
     { label: '%', gridArea: 'remainder' },
-    { label: '+', gridArea: 'add' },
+    { label: '÷', value: '/', gridArea: 'divide' },
     { label: '7', gridArea: 'seven' },
     { label: '8', gridArea: 'eight' },
     { label: '9', gridArea: 'nine' },
@@ -20,6 +21,10 @@ const keyboardButtons = {
     { label: '5', gridArea: 'five' },
     { label: '6', gridArea: 'six' },
     { label: '-', gridArea: 'subtract' },
+    { label: '1', gridArea: 'one' },
+    { label: '2', gridArea: 'two' },
+    { label: '3', gridArea: 'three' },
+    { label: '+', gridArea: 'add' },
     { label: '0', gridArea: 'zero' },
     { label: '.', gridArea: 'dot' },
     { label: '=', value: 'enter', gridArea: 'result' }
@@ -55,6 +60,19 @@ function Keyboard() {
   const { calcValue, setCalcValue, resetCalcValue } = useCalcStore();
 
   const calc: Calc = {
+    basic: () => {
+      try {
+        return {
+          inputs: [calcValue.basic],
+          results: [math.evaluate(calcValue.basic)]
+        };
+      } catch (error) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+    },
     percent: () => {
       const valueArray = calcValue.percent.split(',');
       const firstValue = Number(valueArray[0]);
