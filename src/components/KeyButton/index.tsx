@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { keyboardButton, keyboardButtonText, resultButton } from './index.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -6,17 +6,22 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   gridArea: string;
 }
 
-function KeyButton({ label, gridArea, ...props }: ButtonProps) {
-  return (
-    <button
-      type="button"
-      style={{ gridArea }}
-      {...props}
-      className={`${keyboardButton} ${label === 'result' ? resultButton : ''}`}
-    >
-      <span className={keyboardButtonText}>{label}</span>
-    </button>
-  );
-}
+const KeyButton = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ label, gridArea, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        type="button"
+        style={{ gridArea }}
+        {...props}
+        className={`${keyboardButton} ${label === '=' ? resultButton : ''}`}
+      >
+        <span className={keyboardButtonText}>{label}</span>
+      </button>
+    );
+  }
+);
+
+KeyButton.displayName = 'KeyButton';
 
 export default KeyButton;

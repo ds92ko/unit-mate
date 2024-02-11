@@ -23,7 +23,7 @@ export const keyboardButton = style({
       backgroundColor: 'var(--theme-color)',
       opacity: '0.5'
     },
-    '&:active': {
+    '&:active, &.active': {
       color: 'var(--theme-background)',
       backgroundColor: 'var(--theme-color)'
     }
@@ -37,7 +37,7 @@ export const resultButton = style({
     '&:hover::before': {
       backgroundColor: 'var(--theme-background)'
     },
-    '&:active': {
+    '&:active, &.active': {
       color: 'var(--theme-color)',
       backgroundColor: 'var(--theme-background)'
     }
