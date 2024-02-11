@@ -21,7 +21,7 @@ export const keyboardWrap = style({
 
 export const keyboardWrapBasic = style({
   display: 'grid',
-  gridTemplateRows: 'repeat(4, 1fr)',
+  gridTemplateRows: 'repeat(5, 1fr)',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateAreas: `
     "clearAll clearAll remainder divide  "
