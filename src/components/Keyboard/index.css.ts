@@ -24,10 +24,11 @@ export const keyboardWrapBasic = style({
   gridTemplateRows: 'repeat(4, 1fr)',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gridTemplateAreas: `
-    "clearAll clearAll remainder add     "
+    "clearAll clearAll remainder divide  "
     "seven    eight    nine      multiply"
     "four     five     six       subtract"
-    "zero     dot      result    result  "
+    "one      two      three     add     "
+    "zero     zero     dot       result  "
   `,
   height: '100%'
 });

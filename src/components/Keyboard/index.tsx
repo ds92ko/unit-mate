@@ -1,5 +1,6 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useRef } from 'react';
 import uuid from 'react-uuid';
+import * as math from 'mathjs';
 import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
@@ -9,9 +10,9 @@ import { useHistoryStore } from '@/stores/historyStore';
 
 const keyboardButtons = {
   basic: [
-    { label: 'AC', value: 'esc', gridArea: 'clearAll' },
+    { label: 'AC', value: 'Escape', gridArea: 'clearAll' },
     { label: '%', gridArea: 'remainder' },
-    { label: '+', gridArea: 'add' },
+    { label: '÷', value: '/', gridArea: 'divide' },
     { label: '7', gridArea: 'seven' },
     { label: '8', gridArea: 'eight' },
     { label: '9', gridArea: 'nine' },
@@ -20,15 +21,19 @@ const keyboardButtons = {
     { label: '5', gridArea: 'five' },
     { label: '6', gridArea: 'six' },
     { label: '-', gridArea: 'subtract' },
+    { label: '1', gridArea: 'one' },
+    { label: '2', gridArea: 'two' },
+    { label: '3', gridArea: 'three' },
+    { label: '+', gridArea: 'add' },
     { label: '0', gridArea: 'zero' },
     { label: '.', gridArea: 'dot' },
-    { label: '=', value: 'enter', gridArea: 'result' }
+    { label: '=', value: 'Enter', gridArea: 'result' }
   ],
   alternate: [
     { label: '7', gridArea: 'seven' },
     { label: '8', gridArea: 'eight' },
     { label: '9', gridArea: 'nine' },
-    { label: 'AC', value: 'esc', gridArea: 'clearAll' },
+    { label: 'AC', value: 'Escape', gridArea: 'clearAll' },
     { label: '4', gridArea: 'four' },
     { label: '5', gridArea: 'five' },
     { label: '6', gridArea: 'six' },
@@ -38,7 +43,7 @@ const keyboardButtons = {
     { label: '3', gridArea: 'three' },
     { label: ',', gridArea: 'comma' },
     { label: '0', gridArea: 'zero' },
-    { label: '=', value: 'enter', gridArea: 'result' }
+    { label: '=', value: 'Enter', gridArea: 'result' }
   ]
 };
 
@@ -53,8 +58,22 @@ function Keyboard() {
   const buttonKey = index ? 'basic' : 'alternate';
   const { setResultHistory } = useHistoryStore();
   const { calcValue, setCalcValue, resetCalcValue } = useCalcStore();
+  const buttonRefs = useRef<null[] | HTMLButtonElement[]>([]);
 
   const calc: Calc = {
+    basic: () => {
+      try {
+        return {
+          inputs: [calcValue.basic],
+          results: [math.evaluate(calcValue.basic)]
+        };
+      } catch (error) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+    },
     percent: () => {
       const valueArray = calcValue.percent.split(',');
       const firstValue = Number(valueArray[0]);
@@ -117,14 +136,14 @@ function Keyboard() {
     }
   };
 
-  const handleClickKey = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     const { value } = e.currentTarget;
     switch (value) {
-      case 'esc':
+      case 'Escape':
         resetCalcValue(key);
 
         break;
-      case 'enter':
+      case 'Enter':
         const { inputs, results } = calc[key]();
 
         if (inputs && results) {
@@ -144,16 +163,49 @@ function Keyboard() {
     }
   };
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (!buttonRefs.current) return;
+    const value = e.key;
+    const targetButton = buttonRefs.current.find(button => {
+      if (value === ' ') return button?.value === ',';
+      return button?.value === value;
+    });
+    targetButton?.classList.add('active');
+  };
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    if (!buttonRefs.current) return;
+    const value = e.key;
+    const targetButton = buttonRefs.current.find(button => {
+      if (value === ' ') return button?.value === ',';
+      return button?.value === value;
+    });
+    targetButton?.classList.remove('active');
+    targetButton?.click();
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
       <div className={keyboardWrapClassName}>
-        {keyboardButtons[buttonKey].map(({ label, value, gridArea }) => (
+        {keyboardButtons[buttonKey].map(({ label, value, gridArea }, idx) => (
           <KeyButton
+            ref={button => {
+              if (buttonRefs.current) buttonRefs.current[idx] = button;
+            }}
             key={gridArea}
             label={label}
             value={value || label}
             gridArea={gridArea}
-            onClick={handleClickKey}
+            onClick={handleClick}
           />
         ))}
       </div>
