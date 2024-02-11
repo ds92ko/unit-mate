@@ -9,15 +9,39 @@ import {
 } from './index.css';
 import { srOnly } from '@/styles/layout.css';
 import Icon from '@/components/Icon';
+import { useHistoryStore } from '@/stores/historyStore';
+import { useRouteStore } from '@/stores/routeStore';
 
 function History({ id, inputs, results, isBookmark }: HistoryType) {
+  const { currentRoute } = useRouteStore();
+  const { key } = currentRoute;
+  const { results: resultsHistory, setResultHistory, setBookmarkHistory } = useHistoryStore();
+
+  const handleClickBookmark = () => {
+    const result = {
+      id,
+      inputs,
+      results,
+      isBookmark: !isBookmark
+    };
+    const hasResultsHistory = resultsHistory[key].find(resultHistory => resultHistory.id === id);
+
+    if (hasResultsHistory) {
+      setResultHistory(key, result);
+    }
+    setBookmarkHistory(key, result);
+  };
+
   return (
     <article
       id={id}
       className={historyWrap}
     >
       <div className={historyHeader}>
-        <button type="button">
+        <button
+          type="button"
+          onClick={handleClickBookmark}
+        >
           <Icon
             size={18}
             name={isBookmark ? 'bookmarkOn' : 'bookmarkOff'}

@@ -5,8 +5,8 @@ import { HistoryType } from '@/components/History/type';
 interface HistoryStore {
   results: { [key: string]: HistoryType[] };
   bookmarks: { [key: string]: HistoryType[] };
-  setResultHistory: (key: string, result: HistoryType) => void;
-  setBookmarkHistory: (key: string, bookmark: HistoryType) => void;
+  setResultHistory: (key: string, newResult: HistoryType) => void;
+  setBookmarkHistory: (key: string, newBookmark: HistoryType) => void;
 }
 
 export const useHistoryStore = create<HistoryStore>()(
@@ -19,31 +19,41 @@ export const useHistoryStore = create<HistoryStore>()(
         remAndEm: []
       },
       bookmarks: {},
-      setResultHistory: (key, result) =>
-        set(state => ({
-          results: {
-            ...state.results,
-            [key]: [...(state.results[key] || []), result]
+      setResultHistory: (key, newResult) =>
+        set(state => {
+          const { results } = state;
+
+          const updatedResults = results[key] || [];
+          const existingResultIndex = updatedResults.findIndex(
+            result => result.id === newResult.id
+          );
+
+          if (existingResultIndex !== -1) {
+            updatedResults[existingResultIndex] = newResult;
+          } else {
+            updatedResults.push(newResult);
           }
-        })),
-      setBookmarkHistory: (key, clickedBookmark) =>
+
+          return {
+            ...state,
+            results: {
+              ...results,
+              [key]: updatedResults
+            }
+          };
+        }),
+      setBookmarkHistory: (key, newBookmark) =>
         set(state => {
           const { bookmarks } = state;
 
-          const updatedBookmarks = bookmarks[key] || [];
+          let updatedBookmarks = bookmarks[key] || [];
           const existingBookmarkIndex = updatedBookmarks.findIndex(
-            bookmark => bookmark.id === clickedBookmark.id
+            bookmark => bookmark.id === newBookmark.id
           );
 
           if (existingBookmarkIndex !== -1) {
-            const updatedBookmark = {
-              ...updatedBookmarks[existingBookmarkIndex],
-              isBookmark: !clickedBookmark.isBookmark
-            };
-
-            updatedBookmarks[existingBookmarkIndex] = updatedBookmark;
+            updatedBookmarks = updatedBookmarks.filter(bookmark => bookmark.id !== newBookmark.id);
           } else {
-            const newBookmark: HistoryType = { ...clickedBookmark, isBookmark: true };
             updatedBookmarks.push(newBookmark);
           }
 
