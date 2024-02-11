@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 import uuid from 'react-uuid';
+import * as math from 'mathjs';
 import KeyButton from '@/components/KeyButton';
 import { borderBox } from '@/styles/layout.css';
 import { keyboardContainer, keyboardWrap, keyboardWrapBasic } from './index.css';
@@ -59,6 +60,19 @@ function Keyboard() {
   const { calcValue, setCalcValue, resetCalcValue } = useCalcStore();
 
   const calc: Calc = {
+    basic: () => {
+      try {
+        return {
+          inputs: [calcValue.basic],
+          results: [math.evaluate(calcValue.basic)]
+        };
+      } catch (error) {
+        return {
+          inputs: null,
+          results: null
+        };
+      }
+    },
     percent: () => {
       const valueArray = calcValue.percent.split(',');
       const firstValue = Number(valueArray[0]);

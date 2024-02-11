@@ -13,6 +13,7 @@ export const useHistoryStore = create<HistoryStore>()(
   persist(
     set => ({
       results: {
+        basic: [],
         percent: [],
         viewport: [],
         remAndEm: []
