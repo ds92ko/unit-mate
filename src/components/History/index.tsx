@@ -1,3 +1,4 @@
+import { MouseEvent, KeyboardEvent, KeyboardEventHandler, MouseEventHandler } from 'react';
 import { HistoryType } from './type';
 import {
   historyBody,
@@ -16,6 +17,26 @@ function History({ id, inputs, results, isBookmark }: HistoryType) {
   const { currentRoute } = useRouteStore();
   const { key } = currentRoute;
   const { results: resultsHistory, setResultHistory, setBookmarkHistory } = useHistoryStore();
+
+  const copyNumberValue = (
+    event: MouseEvent<HTMLParagraphElement> | KeyboardEvent<HTMLParagraphElement>
+  ) => {
+    const target = event.target as HTMLParagraphElement;
+    const text = target.textContent || '';
+    const numberValue = text.match(/[-+]?[0-9]*\.?[0-9]+/);
+    if (numberValue) {
+      const valueToCopy = numberValue[0];
+      navigator.clipboard.writeText(valueToCopy);
+    }
+  };
+
+  const handleCopyResultClick: MouseEventHandler<HTMLParagraphElement> = event => {
+    copyNumberValue(event);
+  };
+
+  const handleCopyResultKeyDown: KeyboardEventHandler<HTMLParagraphElement> = event => {
+    copyNumberValue(event);
+  };
 
   const handleClickBookmark = () => {
     const result = {
@@ -62,10 +83,14 @@ function History({ id, inputs, results, isBookmark }: HistoryType) {
           ))}
         </div>
         <div className={historyBox}>
-          {results.map(result => (
+          {results.map((result, index) => (
             <p
               key={result}
               className={historyResult}
+              onClick={handleCopyResultClick}
+              onKeyDown={handleCopyResultKeyDown}
+              role="presentation"
+              tabIndex={index}
             >
               = {result}
             </p>
