@@ -46,6 +46,7 @@ export const historyResult = style({
   lineHeight: '30px',
   fontWeight: 'bold',
   textAlign: 'right',
+  cursor: 'pointer',
   selectors: {
     [`${resultContainer} &`]: {
       fontSize: 32
