@@ -1,4 +1,4 @@
-import { MouseEvent, KeyboardEvent, KeyboardEventHandler, MouseEventHandler } from 'react';
+import { MouseEvent, MouseEventHandler } from 'react';
 import { HistoryType } from './type';
 import {
   historyBody,
@@ -18,8 +18,8 @@ function History({ id, inputs, results, isBookmark }: HistoryType) {
   const { key } = currentRoute;
   const { results: resultsHistory, setResultHistory, setBookmarkHistory } = useHistoryStore();
 
-  const copyNumberValue = (
-    event: MouseEvent<HTMLParagraphElement> | KeyboardEvent<HTMLParagraphElement>
+  const handleCopyResult: MouseEventHandler<HTMLButtonElement> = (
+    event: MouseEvent<HTMLButtonElement>
   ) => {
     const target = event.target as HTMLParagraphElement;
     const text = target.textContent || '';
@@ -28,14 +28,6 @@ function History({ id, inputs, results, isBookmark }: HistoryType) {
       const valueToCopy = numberValue[0];
       navigator.clipboard.writeText(valueToCopy);
     }
-  };
-
-  const handleCopyResultClick: MouseEventHandler<HTMLParagraphElement> = event => {
-    copyNumberValue(event);
-  };
-
-  const handleCopyResultKeyDown: KeyboardEventHandler<HTMLParagraphElement> = event => {
-    copyNumberValue(event);
   };
 
   const handleClickBookmark = () => {
@@ -83,17 +75,15 @@ function History({ id, inputs, results, isBookmark }: HistoryType) {
           ))}
         </div>
         <div className={historyBox}>
-          {results.map((result, index) => (
-            <p
+          {results.map(result => (
+            <button
+              type="button"
               key={result}
               className={historyResult}
-              onClick={handleCopyResultClick}
-              onKeyDown={handleCopyResultKeyDown}
-              role="presentation"
-              tabIndex={index}
+              onClick={handleCopyResult}
             >
               = {result}
-            </p>
+            </button>
           ))}
         </div>
       </div>
