@@ -42,10 +42,12 @@ export const historyInput = style({
 });
 
 export const historyResult = style({
+  color: 'var(--theme-color)',
   fontSize: 26,
   lineHeight: '30px',
   fontWeight: 'bold',
   textAlign: 'right',
+  cursor: 'pointer',
   selectors: {
     [`${resultContainer} &`]: {
       fontSize: 32
