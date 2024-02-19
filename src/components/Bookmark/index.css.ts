@@ -29,7 +29,7 @@ export const bookmarkGuide = style({
 export const bookmark = style({
   minWidth: 0,
   maxWidth: 0,
-  overflow: 'hidden',
+  height: 'calc(100vh - 224px)', // 224px = headerHeight 82 + headerMainGap 42 + mainPaddingBottom 42 + bookmarkContainerPaddingTop 39 + bookmarkContainerPaddingBottom 39
   selectors: {
     [`${bookmarkContainer}.isOpen &`]: {
       padding: '0 28px',
