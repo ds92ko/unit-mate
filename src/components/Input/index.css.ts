@@ -9,7 +9,8 @@ export const InputContents = style({
   '::placeholder': {
     opacity: 0.5,
     fontSize: 24,
-    textAlign: 'left'
+    textAlign: 'left',
+    color: 'var(--theme-color)'
   },
   ':focus-visible': {
     outline: 'none'
