@@ -57,7 +57,7 @@ function Keyboard() {
   const keyboardWrapClassName = index ? keyboardWrapBasic : keyboardWrap;
   const buttonKey = index ? 'basic' : 'alternate';
   const { setResultHistory } = useHistoryStore();
-  const { calcValue, setCalcValue, resetCalcValue } = useCalcStore();
+  const { calcValue, setCalcValue, resetCalcValue, backspaceCalcValue } = useCalcStore();
   const buttonRefs = useRef<null[] | HTMLButtonElement[]>([]);
 
   const calc: Calc = {
@@ -163,35 +163,45 @@ function Keyboard() {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (!buttonRefs.current) return;
-    const value = e.key;
-    const targetButton = buttonRefs.current.find(button => {
-      if (value === ' ') return button?.value === ',';
-      return button?.value === value;
-    });
-    targetButton?.classList.add('active');
-  };
-
-  const handleKeyUp = (e: KeyboardEvent) => {
-    if (!buttonRefs.current) return;
-    const value = e.key;
-    const targetButton = buttonRefs.current.find(button => {
-      if (value === ' ') return button?.value === ',';
-      return button?.value === value;
-    });
-    targetButton?.classList.remove('active');
-    targetButton?.click();
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!buttonRefs.current) return;
+      const value = e.key;
+      if (value === 'Backspace') {
+        if (key) backspaceCalcValue(key);
+        return;
+      }
+      const targetButton = buttonRefs.current.find(button => {
+        if (value === ' ') return button?.value === ',';
+        return button?.value === value;
+      });
+      targetButton?.classList.add('active');
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (!buttonRefs.current) return;
+      const value = e.key;
+
+      if (value === 'Backspace') {
+        if (key) backspaceCalcValue(key);
+        return;
+      }
+
+      const targetButton = buttonRefs.current.find(button => {
+        if (value === ' ') return button?.value === ',';
+        return button?.value === value;
+      });
+      targetButton?.classList.remove('active');
+      targetButton?.click();
+    };
+
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, []);
+  }, [backspaceCalcValue, buttonRefs, key]);
 
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
