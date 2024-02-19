@@ -182,11 +182,6 @@ function Keyboard() {
       if (!buttonRefs.current) return;
       const value = e.key;
 
-      if (value === 'Backspace') {
-        if (key) backspaceCalcValue(key);
-        return;
-      }
-
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
         return button?.value === value;
