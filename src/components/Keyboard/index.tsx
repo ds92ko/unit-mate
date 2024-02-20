@@ -167,10 +167,7 @@ function Keyboard() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!buttonRefs.current) return;
       const value = e.key;
-      if (value === 'Backspace') {
-        if (key) backspaceCalcValue(key);
-        return;
-      }
+
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
         return button?.value === value;
@@ -182,6 +179,10 @@ function Keyboard() {
       if (!buttonRefs.current) return;
       const value = e.key;
 
+      if (value === 'Backspace') {
+        if (key) backspaceCalcValue(key);
+        return;
+      }
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
         return button?.value === value;
@@ -196,7 +197,7 @@ function Keyboard() {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [backspaceCalcValue, buttonRefs, key]);
+  }, [backspaceCalcValue, key]);
 
   return (
     <div className={`${borderBox} ${keyboardContainer}`}>
