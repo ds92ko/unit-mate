@@ -8,6 +8,7 @@ type CalcStore = {
   calcValue: CalcValue;
   setCalcValue: (key: string, value: string) => void;
   resetCalcValue: (key: string) => void;
+  backspaceCalcValue: (key: string) => void;
 };
 
 export const useCalcStore = create<CalcStore>(set => ({
@@ -50,5 +51,14 @@ export const useCalcStore = create<CalcStore>(set => ({
         ...calcValue,
         [key]: ''
       }
-    }))
+    })),
+
+  backspaceCalcValue: key => {
+    set(({ calcValue }) => ({
+      calcValue: {
+        ...calcValue,
+        [key]: calcValue[key].slice(0, -1) // 현재 입력된 값에서 마지막 문자를 제거
+      }
+    }));
+  }
 }));
