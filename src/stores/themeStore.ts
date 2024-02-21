@@ -16,8 +16,7 @@ export const useThemeStore = create<ThemeStore>()(
       themeColor: vars.color.black1,
       toggleDarkMode: () =>
         set(state => ({
-          darkMode: !state.darkMode,
-          themeColor: !state.darkMode ? vars.color.white : vars.color.black1
+          darkMode: !state.darkMode
         })),
       setThemeColor: themeColor => set({ themeColor })
     }),
