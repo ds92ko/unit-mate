@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { InputContents } from './index.css';
 
 function Input({ ...props }) {
+  const [inputValue, setInputValue] = useState<string>('');
   const inputElement = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -9,6 +10,11 @@ function Input({ ...props }) {
       inputElement.current.focus();
     }
   }, []);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <input
       className={InputContents}
@@ -16,6 +22,8 @@ function Input({ ...props }) {
       type="text"
       id="insertNumber"
       ref={inputElement}
+      value={inputValue}
+      onChange={handleChange}
       {...props}
     />
   );
