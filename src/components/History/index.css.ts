@@ -31,6 +31,7 @@ export const historyInput = style({
   fontSize: 18,
   color: 'var(--theme-color)',
   opacity: 0.5,
+  wordBreak: 'break-all',
   selectors: {
     [`${resultContainer} &`]: {
       fontSize: 28
@@ -48,12 +49,14 @@ export const historyResult = style({
   fontWeight: 'bold',
   textAlign: 'right',
   cursor: 'pointer',
+  wordBreak: 'break-all',
   selectors: {
     [`${resultContainer} &`]: {
       fontSize: 32
     },
     [`${bookmarkList}.recentHistory &`]: {
-      fontSize: 40
+      fontSize: 40,
+      lineHeight: '46px'
     }
   }
 });
