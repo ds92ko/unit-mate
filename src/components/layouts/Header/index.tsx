@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { container } from '@/styles/layout.css';
 import { contents, logo } from './index.css';
 import Gnb from '@/components/layouts/Gnb';
@@ -8,7 +9,12 @@ function Header() {
     <header>
       <div className={container}>
         <div className={contents}>
-          <div className={logo}>UNITMATE</div>
+          <NavLink
+            to="/"
+            className={logo}
+          >
+            UNITMATE
+          </NavLink>
           <Gnb />
           <Theme />
         </div>
