@@ -16,7 +16,7 @@ const keyboardButtons = {
     { label: '7', gridArea: 'seven' },
     { label: '8', gridArea: 'eight' },
     { label: '9', gridArea: 'nine' },
-    { label: 'x', value: '*', gridArea: 'multiply' },
+    { label: 'x', value: 'x', gridArea: 'multiply' },
     { label: '4', gridArea: 'four' },
     { label: '5', gridArea: 'five' },
     { label: '6', gridArea: 'six' },
@@ -63,9 +63,10 @@ function Keyboard() {
   const calc: Calc = {
     basic: () => {
       try {
+        const replaceResult = calcValue.basic.replace(/\x/g, '*');
         return {
           inputs: [calcValue.basic],
-          results: [math.evaluate(calcValue.basic)]
+          results: [math.evaluate(replaceResult)]
         };
       } catch (error) {
         return {
@@ -170,8 +171,10 @@ function Keyboard() {
 
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
+        if (value === '*') return button?.value === 'x';
         return button?.value === value;
       });
+
       targetButton?.classList.add('active');
     };
 
@@ -185,6 +188,7 @@ function Keyboard() {
       }
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
+        if (value === '*') return button?.value === 'x';
         return button?.value === value;
       });
       targetButton?.classList.remove('active');
