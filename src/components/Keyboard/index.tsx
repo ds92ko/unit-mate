@@ -167,7 +167,11 @@ function Keyboard() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!buttonRefs.current) return;
       const value = e.key;
-
+      buttonRefs.current.forEach(button => {
+        if (button) {
+          button.blur();
+        }
+      });
       const targetButton = buttonRefs.current.find(button => {
         if (value === ' ') return button?.value === ',';
         return button?.value === value;
