@@ -6,6 +6,6 @@ export const resultContainer = style({
   flexDirection: 'column',
   justifyContent: 'space-between',
   position: 'relative',
-  padding: '36px 38px',
+  padding: '36px 48px',
   height: 'calc((100vh - 201px) / 2)' // 201px = headerHeight 82 + headerMainGap 42 + mainPaddingBottom 42 + resultKeyboardGap 35
 });
